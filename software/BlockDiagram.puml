@@ -1,0 +1,58 @@
+@startuml
+skinparam component{
+  FontSize 13
+  BackgroundColor<<Apache>> Blue
+  BorderColor<<Apache>> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor white
+  ArrowFontName Impact
+  ArrowColor #5d81cf
+  ArrowFontColor #5d81cf
+}
+
+package "LDOs" {
+  [LM2940CT]
+  [RT9080-33GJ5]
+}
+
+package "MCU" {
+  [ESP32] 
+}
+
+package "DAC" {
+  [PCM5102] 
+}
+
+package "Feedback Output" {
+    [MCP6001_1] 
+}
+
+package "Filter Stage" {
+
+  [ES2 Lab Circuit] 
+}
+
+package "Feedback Input" {
+    [MCP6001_2] 
+}
+
+package "Power Amp Stage" {
+  [TPA711] 
+}
+
+[ESP32]           --right-->   [PCM5102]: Bluetooth Audio
+[DAC]             -right-->         [MCP6001_1]: Analog Audio
+[MCP6001_1]       --->   [ES2 Lab Circuit]: Filtering 
+[ES2 Lab Circuit] --->   [MCP6001_2]: Signal Amplification
+[MCP6001_2]       -right->   [TPA711]: Power Output
+[DAC]             --> [TPA711]: Unfiltered Signal 
+
+note top of [LM2940CT]
+  5V for ESP32, OpAmps, Power Amp Stage
+end note
+
+note bottom of [RT9080-33GJ5]
+  3.3V for DAC
+end note
+@enduml
