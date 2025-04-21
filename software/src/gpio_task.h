@@ -33,7 +33,7 @@ static void gpio_event_loop(void *pvParameters);
 // definitions
 bool setup_gpio_task(void)
 {
-    bool isSuccesful = false;
+    bool isSuccesful = false;                                   // Variable to return success or failure of task creation
 
     ESP_LOGI(TAG_BUTTON_TASK, "Setting up GPIO task...");
     gpio_set_direction(button_pin, GPIO_MODE_INPUT);            // Set the GPIO pin as input
@@ -67,6 +67,9 @@ static void gpio_event_loop(void *pvParameters)
     TickType_t start_time = 0;                                  // Variable to store the start time of the button press
     bool button_pressed = false;                                // Flag storing the state of the button press
 
+    // Testing code with LEDs
+    gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT);           // Set GPIO2 (internal LED) as output
+
     while (true)
     {
         if (gpio_get_level(button_pin))
@@ -75,6 +78,9 @@ static void gpio_event_loop(void *pvParameters)
             {
                 start_time = xTaskGetTickCount();
                 button_pressed = true;
+                
+                // Test code with LEDs
+                gpio_set_level(GPIO_NUM_2, 1);                  // Turn LED on
 
                 ESP_LOGI(TAG_BUTTON_TASK, "Button pressed!");
             }
@@ -82,6 +88,10 @@ static void gpio_event_loop(void *pvParameters)
             {
                 TickType_t elapsed_time = xTaskGetTickCount() - start_time;
                 button_pressed = false;
+
+                // Test code with LEDs
+                gpio_set_level(GPIO_NUM_2, 0);                  // Turn LED off
+
                 ESP_LOGI(TAG_BUTTON_TASK, "Button released after %d ms", elapsed_time * portTICK_PERIOD_MS);
 
                 // Check if the button was pressed for more than 1 second
@@ -90,6 +100,15 @@ static void gpio_event_loop(void *pvParameters)
                     ESP_LOGI(TAG_BUTTON_TASK, "Button held for more than 1 second!");
                     //TODO: Add your action here for long press
                     // activate bluetooth mode, stop waveform mode
+
+                    // Start blinking the internal LED for long press
+                    for (int i = 0; i < 100; i++)               
+                    {
+                        gpio_set_level(GPIO_NUM_2, 1);          // Turn LED on
+                        vTaskDelay(pdMS_TO_TICKS(300));         // Delay 300ms
+                        gpio_set_level(GPIO_NUM_2, 0);          // Turn LED off
+                        vTaskDelay(pdMS_TO_TICKS(300));         // Delay 300ms
+                    }
                 }
                 else
                 {
