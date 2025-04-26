@@ -1,4 +1,4 @@
-24752985061471416
+24756476050277340
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -65883,6 +65883,13 @@ SOT95P270X145-5N
 0
 5
 5
+MMBT7002K
+TRANS_MMBT7002K
+
+
+0
+3
+3
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -91258,6 +91265,13 @@ CUI_SJ2-35853B-SMT-TR
 0
 4
 4
+SN74LVC1G3157
+SC70-6
+
+
+0
+6
+6
 SW_3PDT
 SW_FS57003PLT2B2M2QE
 
