@@ -691,7 +691,7 @@
           "group_by": false,
           "label": "Comments",
           "name": "Comments",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -721,7 +721,7 @@
           "group_by": false,
           "label": "Double Checked",
           "name": "Double Checked",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -740,8 +740,8 @@
       "group_symbols": true,
       "include_excluded_from_bom": false,
       "name": "",
-      "sort_asc": false,
-      "sort_field": "Value"
+      "sort_asc": true,
+      "sort_field": "Double Checked"
     },
     "connection_grid_size": 50.0,
     "drawing": {

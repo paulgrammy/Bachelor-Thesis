@@ -13999,7 +13999,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 317.5 87.63 0)
 			(effects
 				(font
@@ -16039,7 +16039,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 316.23 168.91 0)
 			(effects
 				(font
@@ -16796,7 +16796,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 55.88 66.04 0)
 			(effects
 				(font
@@ -19517,7 +19517,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D2.0mm_W4.8mm_H2.5mm_FlatTop"
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder"
 			(at 74.93 369.57 0)
 			(effects
 				(font
@@ -20905,7 +20905,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 317.5 57.15 0)
 			(effects
 				(font
@@ -21092,7 +21092,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D2.0mm_W4.8mm_H2.5mm_FlatTop"
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder"
 			(at 58.42 369.57 0)
 			(effects
 				(font
@@ -21578,7 +21578,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 474.98 184.15 0)
 			(effects
 				(font
@@ -21758,7 +21758,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 54.61 118.11 0)
 			(effects
 				(font
@@ -22338,7 +22338,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 534.67 104.14 0)
 			(effects
 				(font
@@ -22528,7 +22528,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D2.0mm_W4.8mm_H2.5mm_FlatTop"
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder"
 			(at 41.91 369.57 0)
 			(effects
 				(font
@@ -23302,7 +23302,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 316.23 138.43 0)
 			(effects
 				(font
@@ -27000,7 +27000,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 213.36 106.68 0)
 			(effects
 				(font
@@ -27114,7 +27114,7 @@
 				(hide yes)
 			)
 		)
-		(property "OC_Mouser" "581-KAF31GR71C106KU"
+		(property "OC_Mouser" "581-1206YC106KAT4A"
 			(at 364.49 68.58 0)
 			(effects
 				(font
