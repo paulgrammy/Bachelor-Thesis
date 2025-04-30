@@ -7138,16 +7138,6 @@
 	)
 	(wire
 		(pts
-			(xy 405.13 148.59) (xy 405.13 152.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "14210d1c-f95c-44d1-8235-123ca271ddc4")
-	)
-	(wire
-		(pts
 			(xy 494.03 111.76) (xy 506.73 111.76)
 		)
 		(stroke
@@ -7275,16 +7265,6 @@
 			(type default)
 		)
 		(uuid "20ca6269-69ef-4dcb-af53-74e54dcbfed0")
-	)
-	(wire
-		(pts
-			(xy 309.88 57.15) (xy 314.96 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2276ec70-d63d-4a4b-805c-2f2cc4b8ed1d")
 	)
 	(wire
 		(pts
@@ -7706,6 +7686,16 @@
 			(type default)
 		)
 		(uuid "4420fd56-97f5-4832-b1f9-a1000f82ec72")
+	)
+	(wire
+		(pts
+			(xy 311.15 57.15) (xy 314.96 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "445c651c-cff6-40bb-82ec-844814882386")
 	)
 	(wire
 		(pts
@@ -9995,12 +9985,12 @@
 		(uuid "1156f5c3-01c9-42f5-8170-15c9e5f1c7d4")
 	)
 	(label "Bypass"
-		(at 279.4 267.97 180)
+		(at 307.34 262.89 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "164750b2-3242-47e6-8d11-4cb202d0e0f0")
 	)
@@ -10064,16 +10054,6 @@
 		)
 		(uuid "2c943dcf-b134-4cf3-8a58-d2f98ad1de6e")
 	)
-	(label "Filter"
-		(at 279.4 262.89 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "33330b2d-0dec-47f1-851d-e7d78c7f232c")
-	)
 	(label "Poll_Button_1"
 		(at 107.95 335.28 180)
 		(effects
@@ -10134,6 +10114,16 @@
 		)
 		(uuid "4d1df084-dee8-476b-b4de-620c52e31253")
 	)
+	(label "BUFFEROUT"
+		(at 279.4 262.89 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "500c6ebd-cd2a-4992-aa36-9767e6fe9374")
+	)
 	(label "IN"
 		(at 528.32 156.21 0)
 		(effects
@@ -10165,12 +10155,12 @@
 		(uuid "60be1c6c-6485-4a8a-973d-dc162a91e0f6")
 	)
 	(label "Bypass"
-		(at 405.13 148.59 0)
+		(at 474.98 156.21 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "637b0602-7623-43d0-a240-821dd2bf84c4")
 	)
@@ -10183,6 +10173,16 @@
 			(justify left bottom)
 		)
 		(uuid "66f56672-a273-49a9-86b8-54fd1e0512c8")
+	)
+	(label "OUTDACR"
+		(at 311.15 57.15 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6bc28418-1178-4b79-bc08-f9df557e9501")
 	)
 	(label "DGND"
 		(at 212.09 193.04 180)
@@ -10315,12 +10315,12 @@
 		(uuid "837cbd06-1a5b-4bec-bf8d-df28364eb963")
 	)
 	(label "OUTDACR"
-		(at 307.34 262.89 0)
+		(at 279.4 267.97 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "84fc4067-b216-4e9a-9590-c2f802a839f7")
 	)
@@ -10514,16 +10514,6 @@
 		)
 		(uuid "d3a8cad6-cf95-4b51-b3f4-d0a437a58cd8")
 	)
-	(label "Filter"
-		(at 309.88 57.15 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d3baf159-47e2-4198-8a62-93723f8ae927")
-	)
 	(label "Filter_IN"
 		(at 398.78 68.58 0)
 		(effects
@@ -10543,16 +10533,6 @@
 			(justify right bottom)
 		)
 		(uuid "d6b5b13b-4727-46ee-8af6-a03121f6f18a")
-	)
-	(label "BUFFEROUT"
-		(at 474.98 156.21 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e9398a02-a6ae-4139-8d09-16a3059dd682")
 	)
 	(label "Vo+"
 		(at 469.9 86.36 180)
