@@ -35,6 +35,9 @@ bool setup_gpio_task(void)
 
         ESP_LOGI(TAG_BUTTON_TASK, "GPIO task created successfully!");
     }
+    
+    vTaskDelay(pdMS_TO_TICKS(500));                            // Delay to allow task to initialize
+    toggle_operating_mode();                               // Toggle operating mode to start the task
 
     return isSuccesful;                                          // Return true if the task was created successfully, false otherwise
 }

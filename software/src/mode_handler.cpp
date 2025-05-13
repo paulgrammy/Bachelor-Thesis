@@ -1,7 +1,7 @@
 #include "mode_handler.h"
 
 static const char *TAG_MODE = "MODE";                             // Tag for logging
-static operating_mode_t current_mode = MODE_BLUETOOTH;          // Default mode
+static operating_mode_t current_mode = MODE_WAVEFORM;          // Default mode
 
 // definitions
 void set_operating_mode(operating_mode_t mode) {
@@ -16,7 +16,7 @@ operating_mode_t get_operating_mode(void) {
 void toggle_operating_mode(void) {
     if (current_mode == MODE_BLUETOOTH) {
         current_mode = MODE_WAVEFORM;
-
+ 
         bluetooth_mode_deinit();         // clean up
 
         vTaskDelay(pdMS_TO_TICKS(300));  // adjust if needed
