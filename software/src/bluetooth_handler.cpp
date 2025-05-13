@@ -1,35 +1,34 @@
 #include "bluetooth_handler.h"
 
-//declarations
-static const char *TAG_A2DP = "A2DP";                             // Tag for logging
-const               uint8_t I2S_SCK = 14;   /* Audio data bit clock */
-const               uint8_t I2S_WS = 17;    /* Audio data L&R clock */
-const               uint8_t I2S_SDOUT = 4;  /* ESP32 audio data output */
+// declarations
+static const char *TAG_A2DP = "A2DP";                           // Tag for logging
+const uint8_t I2S_SCK = 14;                                     /* Audio data bit clock */
+const uint8_t I2S_WS = 17;                                      /* Audio data L&R clock */
+const uint8_t I2S_SDOUT = 4;                                    /* ESP32 audio data output */
 
 static TaskHandle_t a2dpTaskHandle = nullptr;
 static BluetoothA2DPSink a2dp_sink;
 
-// Task function
-void a2dp_task(void* pvParameters) {
+void a2dp_task(void *pvParameters)
+{
     ESP_LOGI(TAG_A2DP, "Starting Bluetooth A2DP sink");
 
-    // Optionally configure I2S pins
     i2s_pin_config_t my_pins = {
         .bck_io_num = I2S_SCK,
         .ws_io_num = I2S_WS,
         .data_out_num = I2S_SDOUT,
-        .data_in_num = I2S_PIN_NO_CHANGE
-    };
+        .data_in_num = I2S_PIN_NO_CHANGE};
 
     a2dp_sink.set_pin_config(my_pins);
-    a2dp_sink.set_stream_reader([](const uint8_t* data, uint32_t len) {
-        // Optional: analyze or process stream data here
-    });
+    a2dp_sink.set_stream_reader([](const uint8_t *data, uint32_t len)
+                                {
+                                });
 
     a2dp_sink.start(get_board_id());
 
-    while (true) {
-        vTaskDelay(pdMS_TO_TICKS(1000));  // Could also do BT monitoring here
+    while (true)
+    {
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
     // Should not reach here, but clean up just in case
@@ -39,40 +38,48 @@ void a2dp_task(void* pvParameters) {
 
 // public
 
-bool is_bluetooth_running() {
-    return is_running;  // Return the running flag
+bool is_bluetooth_running()
+{
+    return is_running;
 }
 
-void bluetooth_mode_init() {
-    if (a2dpTaskHandle == nullptr) {
+void bluetooth_mode_init()
+{
+    if (a2dpTaskHandle == nullptr)
+    {
         xTaskCreatePinnedToCore(
             a2dp_task,
             "A2DP Task",
             4096,
-            nullptr,
+            a2dpTaskHandle,
             5,
             &a2dpTaskHandle,
-            0  // or 1 for specific core
+            0 
         );
-    } else {
+    }
+    else
+    {
         ESP_LOGW(TAG_A2DP, "A2DP task already running");
     }
 
-    is_running = true;  // Set the running flag to true
+    is_running = true; 
 }
 
-void bluetooth_mode_deinit() {
-    if (a2dpTaskHandle != nullptr) {
+void bluetooth_mode_deinit()
+{
+    if (a2dpTaskHandle != nullptr)
+    {
         ESP_LOGI(TAG_A2DP, "Stopping A2DP task");
-        a2dp_sink.end();  // Stops the A2DP sink
+        a2dp_sink.end(); 
         vTaskDelete(a2dpTaskHandle);
         a2dpTaskHandle = nullptr;
-    } else {
+    }
+    else
+    {
         ESP_LOGW(TAG_A2DP, "A2DP task not running");
     }
 
-    is_running = false; // Set the running flag to false
+    is_running = false; 
 }
 
-// private 
-
+// private

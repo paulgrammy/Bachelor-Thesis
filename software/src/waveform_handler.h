@@ -11,11 +11,18 @@
 
 // declarations
 
-#define WAVEFORM_TASK_STACK_SIZE 8192
+#define WAVEFORM_TASK_STACK_SIZE 8192                           // Larger stack size for the task                           
 #define WAVEFORM_TASK_PRIORITY   6
 
 // public
 
+/* Waveform types enumeration
+ * This enum defines the different waveform types that can be generated.
+ * WAVEFORM_SINE - Sine wave
+ * WAVEFORM_SQUARE - Square wave
+ * WAVEFORM_TRIANGLE - Triangle wave
+ * WAVEFORM_SAWTOOTH - Sawtooth wave
+ */
 typedef enum {
     WAVEFORM_SINE,
     WAVEFORM_SQUARE,
@@ -37,7 +44,7 @@ void waveform_mode_deinit();
 
 /* Get the current waveform type
  * This function will return the current waveform type.
- @returns a waveform_type_t enum.
+ @returns current waveform as waveform_type_t enum.
  */
 uint8_t get_waveform_type(); // Get the current waveform type
 

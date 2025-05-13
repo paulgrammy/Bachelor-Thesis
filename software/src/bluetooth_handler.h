@@ -1,7 +1,7 @@
 #ifndef BLUETOOTH_HANDLER_H
 #define BLUETOOTH_HANDLER_H
 
-#include <Arduino.h>                                             // Include Arduino library for ESP32
+#include <Arduino.h>                                            
 #include <ESP_I2S.h>
 #include <esp_log.h>
 #include <freertos/FreeRTOS.h>
@@ -13,16 +13,16 @@
 
 // public
 
-/* Bluetooth A2DP Sink
+/* Starts Bluetooth and A2DP sink
  * This function will initalize Bluetooth.
  * The function will start the A2DP sink with the board ID as the name.
  */
-void bluetooth_mode_init();      // Starts Bluetooth + A2DP task
+void bluetooth_mode_init();    
 
-/* Bluetooth de-initialize
+/* Stops Bluetooth and A2DP sink
  * This function will disable Bluetooth, in turn disconnecting from any device. 
  */
-void bluetooth_mode_deinit();    // Stops Bluetooth + A2DP task
+void bluetooth_mode_deinit();   
 
 /* Check if bluetooth task is running
 * This function will return true if the task is running, false otherwise.
@@ -32,6 +32,6 @@ void bluetooth_mode_deinit();    // Stops Bluetooth + A2DP task
 bool is_bluetooth_running();
 
 // private
-static bool is_running = false;                             // Flag to mark if the task is running
+static bool is_running = false;                                 // Flag to mark if the task is running
 
 #endif // BLUETOOTH_HANDLER_H

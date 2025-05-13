@@ -1,0 +1,62 @@
+@startuml
+!theme plain
+title Board State Machine
+
+[*] --> Setup : Power On / Reset
+
+state Setup {
+  [*] --> Initialize_ADC
+  Initialize_ADC --> Initialize_GPIO 
+  Initialize_GPIO --> Loop
+  Loop : Poll Button, check long & short presses
+
+  Initialize_ADC : setup_adc()
+  Initialize_ADC : identify_and_set_board_id()
+  Initialize_GPIO : setup_gpio_task()
+}
+
+Loop --> Bluetooth_Mode : default behaviour on boot
+
+state Mode_Handler {
+  Mode_Handler : public toggle_operating_mode()
+  Mode_Handler : public set_operating_mode()
+  Mode_Handler : public get_operating_mode()
+  Mode_Handler : public cycle_waveforms()
+
+}
+
+state Bluetooth_Mode {
+  Bluetooth_Mode : public bluetooth_mode_init() => createTask
+  Bluetooth_Mode : public bluetooth_mode_deinit() => destroyTask
+  Bluetooth_Mode : public isRunning()
+  Bluetooth_Mode : private a2dp_task()
+  
+  StartA2DPSink --> WaitingForConnection : A2DP succesfully created
+  WaitingForConnection --> PlayingAudio : A2DP connected
+  PlayingAudio --> WaitingForConnection : A2DP disconnected
+  PlayingAudio ---> PlayingAudio
+}
+
+state Waveform_Mode {
+  Waveform_Mode : public waveform_mode_init()
+  Waveform_Mode : public waveform_mode_deinit()
+  Waveform_Mode : public isRunning()
+
+  StartWaveformTask --> ConfigureAndInstallI2S
+  ConfigureAndInstallI2S --> GenerateWave
+  GenerateWave ---> GenerateWave
+}
+
+note right of Mode_Handler
+    Mode Handler will toggle between the two modes.
+    Its toggle function is called on long press.
+    Its cycle waveforms function is called on short press.
+end note
+
+
+Loop --> Mode_Handler : On button interation, cycle mode \n using toggle_operating_mode()
+Mode_Handler --> Waveform_Mode : init waveform mode \n disable Bluetooth mode
+Mode_Handler --> Bluetooth_Mode : init Bluetooth mode \n disable waveform mode
+Mode_Handler -right-> Waveform_Mode : On Short Press Cycle Waveforms
+
+@enduml
