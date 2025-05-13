@@ -1,6 +1,5 @@
 #include "gpio_task.h"
 
-// private
 static const char *TAG_BUTTON_TASK = "GPIO_TASK";
 static uint8_t task_parameters;                                 // Task parameters, unused but still defined
 static TaskHandle_t gpioHandle = NULL;                          // When task created successfully, this will hold the address in memory of the task
@@ -75,6 +74,7 @@ static void gpio_event_loop(void *pvParameters)
             if (elapsed_time < pdMS_TO_TICKS(1000))
             {
                 //TODO: Add your short press action here!
+                cycle_waveforms();                              // Cycle through waveforms
 
                 ESP_LOGI(TAG_BUTTON_TASK, "Button released!");
                 ESP_LOGI(TAG_BUTTON_TASK, "Brief press detected!");
@@ -89,9 +89,9 @@ static void gpio_event_loop(void *pvParameters)
                 has_triggered_long_press = true;
                 blinking = true;                                // Start blinking because button is held
 
-                //TODO: Add your long press action here!
-
                 ESP_LOGI(TAG_BUTTON_TASK, "Long press and hold detected!");
+                //TODO: Add your long press action here!
+                toggle_operating_mode();                       // Toggle operating mode
             }
         }
 
