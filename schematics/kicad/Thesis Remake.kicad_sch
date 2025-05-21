@@ -6154,9 +6154,9 @@
 		)
 		(uuid "01a0e007-70ff-4040-84b3-0bd484cc85bb")
 	)
-	(text "Bachelorarbeit TODO:\n\n- Fix software: research libraries, fix PlatformIO configuration\n- Bypassing switch from FilterIN to FilterOUT\n- Research wave generation on ESP32\n- Consider enclosing the board\n- Research about study groups\n- Consider reworking the layout:\n	- Change test pads\n	- Swap filter IN and OUT\n\nAdd: \nAnalog multiplexer as bypass switch instead of mechanical one -> button\nOne button: pressing it fast will cycle waveforms, longpress will start bluetooth mode\nled for pairing and waveform, another led for bypass switch, test led for on/off\n\nModes:\n- long press = bluetooth on/off\n- short press 1 = sine\n- short press 1 = square\n- short press 1 = saw\n"
+	(text "Bachelorarbeit TODO:\n\n- Fix software: research libraries, fix PlatformIO configuration\n- Consider enclosing the board\n- Research about study groups\n"
 		(exclude_from_sim no)
-		(at -176.022 36.83 0)
+		(at 444.5 317.246 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -6383,6 +6383,20 @@
 		)
 		(uuid "c4fe61f2-8dbf-4e07-9781-448c34c4c4b0")
 	)
+	(text "TODO for next iteration: \n- move buttons more on the right side \n- change the TX pinned button to IO27\n- add an external RST "
+		(exclude_from_sim no)
+		(at 445.77 340.868 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
+				(color 29 42 255 1)
+			)
+			(justify left)
+		)
+		(uuid "c712ec88-bc6f-4427-85c6-f0139927aad6")
+	)
 	(text "The first LM2940 shall only supply the ESP32.\n\nOnly one reverse protection diode is used for both LMs."
 		(exclude_from_sim no)
 		(at 39.37 32.004 0)
@@ -6451,20 +6465,6 @@
 			(justify left)
 		)
 		(uuid "e3f15b82-2ad1-4a66-b7a1-6ba3a2881a7d")
-	)
-	(text "Comments:\n- one polarity diode, output of the diode\ngoes to each LDO\n- redo resistor ladder circuit, use 3.3V supplied as output by the ESP\n- replace the MUX with the sn74LVC1G3157\n- insure supplying the MUX with 5V\n- add a level shifter between ESP HI_LO label and MUX like a MOSFET (MMBT7002K), see circuits (open collector)\n- I2S protocol for waveform generation - how can you generate them? PCM? \n- ESD protection by adding 1k after bias node and noninverting input of 2nd MCP6001"
-		(exclude_from_sim no)
-		(at -176.276 -31.75 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-				(thickness 0.508)
-				(bold yes)
-				(color 0 255 0 1)
-			)
-			(justify left)
-		)
-		(uuid "e76cc823-3688-443d-a2d9-d6bf58c65649")
 	)
 	(text "DIGITAL POWER SUPPLY\n"
 		(exclude_from_sim no)
@@ -10587,6 +10587,24 @@
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA"
+			"AABadLcA8AAceUICAADwABx5QgIAAGAANxhCAgAAYAA3GEICAAAAQO0YQgIAAACwRgAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"

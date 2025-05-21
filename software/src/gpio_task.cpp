@@ -4,7 +4,6 @@ static const char *TAG_BUTTON_TASK = "GPIO_TASK";
 static uint8_t task_parameters;                                 // Task parameters, unused but still defined
 static TaskHandle_t gpioHandle = NULL;                          // When task created successfully, this will hold the address in memory of the task
 const gpio_num_t button_pin = (gpio_num_t)BUTTON_PIN;           // GPIO pin for the button, default is 25
-
 // definitions
 bool setup_gpio_task(void)
 {
@@ -16,12 +15,13 @@ bool setup_gpio_task(void)
 
     gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT);           // Setup Internal LED
 
-    xTaskCreate(gpio_event_loop,
+    xTaskCreatePinnedToCore(gpio_event_loop,
                 "GPIO Task",
                 GPIO_STACK_SIZE,
                 &task_parameters,
                 TASK_PRIORITY,
-                &gpioHandle);                                   // Create the task with the function gpio_event_loop() and pass the task parameters to it
+                &gpioHandle,
+                1);                                   // Create the task with the function gpio_event_loop() and pass the task parameters to it
 
     if (gpioHandle == NULL)                                     // Check if the task has been created
     {
@@ -35,9 +35,8 @@ bool setup_gpio_task(void)
 
         ESP_LOGI(TAG_BUTTON_TASK, "GPIO task created successfully!");
     }
-
-    vTaskDelay(pdMS_TO_TICKS(500));                             // Delay to allow task to initialize
     toggle_operating_mode();                                    // Kickstart bluetooth operation
+    vTaskDelay(pdMS_TO_TICKS(500));                             // Delay to allow task to initialize
 
     return isSuccesful;
 }
@@ -78,8 +77,7 @@ static void gpio_event_loop(void *pvParameters)
             {
                 cycle_waveforms();                              // Cycle through waveforms
 
-                ESP_LOGI(TAG_BUTTON_TASK, "Button released!");
-                ESP_LOGI(TAG_BUTTON_TASK, "Brief press detected!");
+                ESP_LOGI(TAG_BUTTON_TASK, "Button released, short press!");
             }
         }
 
@@ -91,8 +89,9 @@ static void gpio_event_loop(void *pvParameters)
                 has_triggered_long_press = true;
                 blinking = true;                                // Start blinking because button is held
 
-                ESP_LOGI(TAG_BUTTON_TASK, "Long press and hold detected!");
+                ESP_LOGI(TAG_BUTTON_TASK, "Button released, long press and hold!");
                 toggle_operating_mode();                        // Toggle operating mode
+
             }
         }
 
@@ -111,6 +110,6 @@ static void gpio_event_loop(void *pvParameters)
         }
 
         last_button_state = current_button_state;
-        vTaskDelay(pdMS_TO_TICKS(50));                          // Smoother loop
+        vTaskDelay(pdMS_TO_TICKS(30));                          // Smoother loop
     }
 }

@@ -21,6 +21,8 @@
  */
 bool setup_gpio_task(void);
 
+//private
+
 /* GPIO event loop function
  * This function is called from the setup_gpio_task() function. It will create a task that will run in the background and check for GPIO events.
  * The task will be created with a stack size of 2048 bytes and a priority of 5.

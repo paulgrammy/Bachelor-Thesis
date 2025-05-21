@@ -28,7 +28,7 @@ void a2dp_task(void *pvParameters)
 
     while (true)
     {
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 
     // Should not reach here, but clean up just in case
@@ -50,7 +50,7 @@ void bluetooth_mode_init()
         xTaskCreatePinnedToCore(
             a2dp_task,
             "A2DP Task",
-            4096,
+            8192,
             a2dpTaskHandle,
             5,
             &a2dpTaskHandle,
@@ -71,6 +71,7 @@ void bluetooth_mode_deinit()
     {
         ESP_LOGI(TAG_A2DP, "Stopping A2DP task");
         a2dp_sink.end(); 
+        
         vTaskDelete(a2dpTaskHandle);
         a2dpTaskHandle = nullptr;
     }
