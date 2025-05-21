@@ -68,12 +68,16 @@ void build_waveform_data(uint8_t waveform_type); // Build waveform data
 
 // private
 
-static const int N = 1024;                                      // sample index
-static int16_t waveform_data[N * 2];                            // stereo
-static float phase = 0.0f;
-static float frequency = 440.0f; // A4
-static float sample_rate = 44100.0f;                            // sample rate set to 44.1kHz  
-static float amplitude = 1024;                                 // amplitude of the waveform, 32768 is max for 16-bit signed int, half of that is 16384
+#define SAMPLE_RATE 44100
+#define FREQUENCY 440
+#define AMPLITUDE 1024
+#define N (SAMPLE_RATE / FREQUENCY)                             // Number of samples per period
+
+static const float sample_rate = SAMPLE_RATE;
+static const float frequency = FREQUENCY;
+static const float amplitude = AMPLITUDE;
+static int waveform_length_bytes = 0;
+static int16_t waveform_data[N * 2];                            
 
 /* This function generates and sends waveform data in chunks to avoid blocking the CPU.
  * It uses the I2S driver to send the data to the DAC.

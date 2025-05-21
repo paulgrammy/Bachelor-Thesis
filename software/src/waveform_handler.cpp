@@ -8,7 +8,6 @@ static TaskHandle_t waveformTaskHandle = NULL; // Task handle for the waveform t
 static const uint8_t I2S_SCK = 14;             // Audio data bit clock
 static const uint8_t I2S_WS = 17;              // Audio data L&R clock
 static const uint8_t I2S_SDOUT = 4;            // ESP32 audio data output
-static bool waveform_chaged = false;           // Flag used to cleanup waveform data
 
 // definitions
 
@@ -36,6 +35,9 @@ void waveform_mode_init()
     {
         ESP_LOGW(TAG_WAVEFORM, "Waveform task already running");
     }
+
+    //Kickstart generation
+    set_waveform_type(waveform_task_parameters);
 
     is_running = true;
 }
@@ -84,7 +86,7 @@ void waveform_task(void *pvParameters)
         .communication_format = (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S,
         .intr_alloc_flags = 0, // default interrupt priority
         .dma_buf_count = 4,
-        .dma_buf_len = 32,
+        .dma_buf_len = 256,
         .use_apll = false,
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 0, 0)
         .tx_desc_auto_clear =
@@ -118,13 +120,11 @@ void waveform_task(void *pvParameters)
 
     while (true)
     {
-        for (int i = 0; i < N; ++i)
+        size_t bytes_written;
+        esp_err_t err = i2s_write(I2S_NUM_0, waveform_data, waveform_length_bytes, &bytes_written, portMAX_DELAY);
+        if (err != ESP_OK)
         {
-            /* Splitting into smaller chunks to avoid blocking the CPU
-             * The waveform data is generated in chunks of N/4 samples
-             * This allows for smoother operation and avoids blocking the CPU
-             */
-            generate_wave(i, i + N / 4); // Generate the waveform
+            ESP_LOGE(TAG_WAVEFORM, "I2S write failed: %s", esp_err_to_name(err));
         }
     }
 }
@@ -138,7 +138,8 @@ void set_waveform_type(uint8_t waveform_type)
 {
     waveform_task_parameters = waveform_type; // Set the current waveform type
 
-    memset(waveform_data, 0, sizeof(waveform_data)); // Clear the waveform data
+    // Generate 1 full period of waveform data
+    generate_wave(0, N);
 
     ESP_LOGI(TAG_WAVEFORM, "Waveform buffer cleaned %d, %d", waveform_data[0], waveform_data[1]); // Log the change
 }
@@ -150,72 +151,71 @@ static void generate_wave(int start_index, int end_index)
     // // Generate waveform data
     // for (int i = start_index; i < end_index; ++i)
     // {
-        for (int i = 0; i < N; ++i)
+    for (int i = 0; i < N; ++i)
+    {
+        int16_t sample = 0; // Initialize sample to zero
+
+        // t is N/fs where N is sample index (in this case, i) and fs is sample rate
+        float t = float(i) / sample_rate;
+
+        // phase angle required for sine and square; 2*pi*f*t
+        float phase = 2.0f * M_PI * frequency * t;
+
+        /* sinf is used because it is faster than sin
+         * - if sinf is used, there is no need for type conversion
+         * - it will also make code faster since it uses single-precision floating point, sin uses double-precision
+         * - there won't be any loss of precision since we are using 16-bit signed int
+         */
+        switch (waveform_task_parameters)
         {
-            int16_t sample = 0; // Initialize sample to zero
-
-            // t is N/fs where N is sample index (in this case, i) and fs is sample rate
-            float t = float(i) / sample_rate;
-
-            // phase angle required for sine and square; 2*pi*f*t
-            float phase = 2.0f * M_PI * frequency * t;
-
-            /* sinf is used because it is faster than sin
-             * - if sinf is used, there is no need for type conversion
-             * - it will also make code faster since it uses single-precision floating point, sin uses double-precision
-             * - there won't be any loss of precision since we are using 16-bit signed int
+        case WAVEFORM_SINE:
+            /* Sine wave = A*sin(2*pi*f*t) = A*sin(phase)
+             * sin(phase) is in the range [-1, 1], so this will generate a continuous value in the range [-A, A]
              */
-            switch (waveform_task_parameters)
+            sample = (int16_t)(amplitude * sinf(phase));
+            break;
+        case WAVEFORM_SQUARE:
+            /* Square wave = A*sign(sin(2*pi*f*t)) = A*sign(phase)
+             * sinf(phase) is in the range [-1, 1], so the if statement will fix sample to either -A or A
+             */
+            if (sinf(phase) > 0)
             {
-            case WAVEFORM_SINE:
-                /* Sine wave = A*sin(2*pi*f*t) = A*sin(phase)
-                 * sin(phase) is in the range [-1, 1], so this will generate a continuous value in the range [-A, A]
-                 */
-                sample = (int16_t)(amplitude * sinf(phase));
-                break;
-            case WAVEFORM_SQUARE:
-                /* Square wave = A*sign(sin(2*pi*f*t)) = A*sign(phase)
-                 * sinf(phase) is in the range [-1, 1], so the if statement will fix sample to either -A or A
-                 */
-                if (sinf(phase) > 0)
-                {
-                    sample = (int16_t)(amplitude); // Positive half of square wave
-                }
-                else
-                {
-                    sample = (int16_t)(-amplitude); // Negative half of square wave
-                }
-                break;
-            case WAVEFORM_TRIANGLE:
-                /* Triangle wave = A*(2/pi)*asin(sin(2*pi*f*t)) = A*(2/pi)*asin(phase)
-                 * sinf(phase) is in the range [-1, 1], so this will generate a continuous value in the range [-A, A]
-                 * asin(sin(phase)) is in the range [-pi/2, pi/2], so this will now map the values to [-pi/2, pi/2]
-                 * (2/pi) is used to scale the value to the range [-A, A]
-                 */
-                sample = (int16_t)(amplitude * (2.0f / M_PI) * asinf(sinf(phase)));
-                break;
-            case WAVEFORM_SAWTOOTH:
-                /* Sawtooth wave = A*(2/pi)*(phase - pi) = A*(2/pi)*(phase)
-                 * phase is in the range [0, 2*pi], so this will generate a continuous value in the range [-A, A]
-                 * (2/pi) is used to scale the value to the range [-A, A]
-                 */
-                sample = (int16_t)(amplitude * (2.0f * (fmodf(phase, 2.0f * M_PI) / (2.0f * M_PI)) - 1.0f));; // Sawtooth from -A to +A
-                break;
-            default:
-                break;
+                sample = (int16_t)(amplitude); // Positive half of square wave
             }
+            else
+            {
+                sample = (int16_t)(-amplitude); // Negative half of square wave
+            }
+            break;
+        case WAVEFORM_TRIANGLE:
+            /* Triangle wave = A*(2/pi)*asin(sin(2*pi*f*t)) = A*(2/pi)*asin(phase)
+             * sinf(phase) is in the range [-1, 1], so this will generate a continuous value in the range [-A, A]
+             * asin(sin(phase)) is in the range [-pi/2, pi/2], so this will now map the values to [-pi/2, pi/2]
+             * (2/pi) is used to scale the value to the range [-A, A]
+             */
+            sample = (int16_t)(amplitude * (2.0f / M_PI) * asinf(sinf(phase)));
+            break;
+        case WAVEFORM_SAWTOOTH:
+            /* Sawtooth wave = A*(2/pi)*(phase - pi) = A*(2/pi)*(phase)
+             * phase is in the range [0, 2*pi], so this will generate a continuous value in the range [-A, A]
+             * (2/pi) is used to scale the value to the range [-A, A]
+             */
+            sample = (int16_t)(amplitude * (2.0f * (fmodf(phase, 2.0f * M_PI) / (2.0f * M_PI)) - 1.0f));
+            ; // Sawtooth from -A to +A
+            break;
+        default:
+            break;
+        }
 
-            // Write data to the waveform data array
-            waveform_data[2 * i] = sample;     // Left channel
-            waveform_data[2 * i + 1] = sample; // Right channel
+        // Write data to the waveform data array
+        waveform_data[2 * i] = sample;     // Left channel
+        waveform_data[2 * i + 1] = sample; // Right channel
 
-            // Logging will slow down the process, so it is commented out
-            // // print package
-            // ESP_LOGI(TAG_WAVEFORM, "Sample %d: %d", i, sample);
+        // Logging will slow down the process, so it is commented out
+        // // print package
+        // ESP_LOGI(TAG_WAVEFORM, "Sample %d: %d", i, sample);
         // }
     }
 
-    // Write the waveform data to I2S
-    size_t bytes_written;
-    i2s_write(I2S_NUM_0, waveform_data, sizeof(waveform_data), &bytes_written, portMAX_DELAY);
+    waveform_length_bytes = sizeof(waveform_data);
 }
