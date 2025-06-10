@@ -14,8 +14,8 @@
 
 // declarations
 
-#define WAVEFORM_TASK_STACK_SIZE 1000                           // Larger stack size for the task                           
-#define WAVEFORM_TASK_PRIORITY   10
+#define WAVEFORM_TASK_STACK_SIZE 1000 // Larger stack size for the task
+#define WAVEFORM_TASK_PRIORITY 10
 
 // public
 
@@ -26,11 +26,13 @@
  * WAVEFORM_TRIANGLE - Triangle wave
  * WAVEFORM_SAWTOOTH - Sawtooth wave
  */
-typedef enum {
+typedef enum
+{
     WAVEFORM_SINE,
     WAVEFORM_SQUARE,
     WAVEFORM_TRIANGLE,
-    WAVEFORM_SAWTOOTH,
+    WAVEFORM_INFECTED,
+    WAVEFORM_SWEEP,
 } waveform_type_t;
 
 /* Start waveform mode
@@ -68,27 +70,33 @@ void build_waveform_data(uint8_t waveform_type); // Build waveform data
 
 // private
 
-static const int N = 1024;                                      // sample index
-static int16_t waveform_data[N * 2];                            // stereo
-static float phase = 0.0f;
-static float frequency = 440.0f; // A4
-static float sample_rate = 44100.0f;                            // sample rate set to 44.1kHz  
-static float amplitude = 1024;                                 // amplitude of the waveform, 32768 is max for 16-bit signed int, half of that is 16384
+#define SAMPLE_RATE 44100
+#define FREQUENCY 200
+#define AMPLITUDE 512
+#define N (SAMPLE_RATE / FREQUENCY) // Number of samples per period
+#define INFECTED_WAVEFORM_TABLE_SIZE 294
+
+static const float sample_rate = SAMPLE_RATE;
+static const float frequency = FREQUENCY;
+static const float amplitude = AMPLITUDE;
+static int waveform_length_bytes = 0;
+static int16_t waveform_data[N * 2];
+static float nr_samples;
 
 /* This function generates and sends waveform data in chunks to avoid blocking the CPU.
  * It uses the I2S driver to send the data to the DAC.
  * The waveform type is determined by the waveform_task_parameters variable.
  * The function will run in a loop and generate the waveform data continuously.
- * Audio data is formated as interleaved left and right samples, MSB first, Philips timing. 
+ * Audio data is formated as interleaved left and right samples, MSB first, Philips timing.
  * Generate amplitude values (=sample points of the waveform) as 16-bit signed integers.
- * Shift left to form a 32-bit I2S word, MSB first. 
- * Then interleaving left and right samples to form a stereo output for the PCM5102 DAC. 
- * ESP32 takes care of clocks and timing using DMA. 
+ * Shift left to form a 32-bit I2S word, MSB first.
+ * Then interleaving left and right samples to form a stereo output for the PCM5102 DAC.
+ * ESP32 takes care of clocks and timing using DMA.
  */
 static void generate_wave(int start_index, int end_index);
 
 /* Waveform task
-*/
+ */
 static void waveform_task(void *pvParameters);
 
 #endif // WAVEFORM_HANDLER_H
