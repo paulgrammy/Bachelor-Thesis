@@ -36,9 +36,13 @@ void waveform_mode_init()
         ESP_LOGW(TAG_WAVEFORM, "Waveform task already running");
     }
 
+<<<<<<< HEAD
     vTaskDelay(10);
 
     // Kickstart generation
+=======
+    //Kickstart generation
+>>>>>>> 396b85de37869f8365576f73af94f6a35c727b2a
     set_waveform_type(waveform_task_parameters);
 
     is_running = true;
@@ -124,7 +128,10 @@ void waveform_task(void *pvParameters)
     {
         size_t bytes_written;
         esp_err_t err = i2s_write(I2S_NUM_0, waveform_data, waveform_length_bytes, &bytes_written, portMAX_DELAY);
+<<<<<<< HEAD
         i2s_zero_dma_buffer(I2S_NUM_0); // Clear the DMA buffer after writing
+=======
+>>>>>>> 396b85de37869f8365576f73af94f6a35c727b2a
         if (err != ESP_OK)
         {
             ESP_LOGE(TAG_WAVEFORM, "I2S write failed: %s", esp_err_to_name(err));
@@ -242,7 +249,7 @@ static void generate_wave(int start_index, int end_index)
 
         //     sample = (int16_t)(amplitude * sinf(sweep_phase)); // Generate the sample for the sweep frequency
         //     break;
-        // }
+        }
         default:
             break;
         }
