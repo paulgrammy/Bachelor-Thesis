@@ -36,6 +36,18 @@ void waveform_mode_init()
         ESP_LOGW(TAG_WAVEFORM, "Waveform task already running");
     }
 
+    //Kickstart generation
+    set_waveform_type(waveform_task_parameters);
+
+<<<<<<< HEAD
+    vTaskDelay(10);
+
+    // Kickstart generation
+=======
+    //Kickstart generation
+>>>>>>> 396b85de37869f8365576f73af94f6a35c727b2a
+    set_waveform_type(waveform_task_parameters);
+
 <<<<<<< HEAD
     vTaskDelay(10);
 
@@ -150,6 +162,8 @@ void set_waveform_type(uint8_t waveform_type)
 
     // Generate 1 full period of waveform data
     generate_wave(0, N);
+    // Generate 1 full period of waveform data
+    generate_wave(0, N);
 
     ESP_LOGI(TAG_WAVEFORM, "Waveform buffer cleaned %d, %d", waveform_data[0], waveform_data[1]); // Log the change
 }
@@ -158,24 +172,20 @@ void set_waveform_type(uint8_t waveform_type)
 
 static void generate_wave(int start_index, int end_index)
 {
-    // Use N as the number of samples per period when generating all waveforms except for infected waveform
-    if (waveform_task_parameters == WAVEFORM_INFECTED)
-    {
-        // For infected waveform, use a fixed size
-        nr_samples = INFECTED_WAVEFORM_TABLE_SIZE;
-    }
-    else
-    {
-        nr_samples = N; // Use N for other waveforms
-    }
-    
-    for (int i = 0; i < nr_samples; ++i)
+    // // Generate waveform data
+    // for (int i = start_index; i < end_index; ++i)
+    // {
+    for (int i = 0; i < N; ++i)
     {
         int16_t sample = 0; // Initialize sample to zero
 
         // t is N/fs where N is sample index (in this case, i) and fs is sample rate
         float t = float(i) / sample_rate;
+        // t is N/fs where N is sample index (in this case, i) and fs is sample rate
+        float t = float(i) / sample_rate;
 
+        // phase angle required for sine and square; 2*pi*f*t
+        float phase = 2.0f * M_PI * frequency * t;
         // phase angle required for sine and square; 2*pi*f*t
         float phase = 2.0f * M_PI * frequency * t;
 
@@ -257,7 +267,13 @@ static void generate_wave(int start_index, int end_index)
         // Write data to the waveform data array
         waveform_data[2 * i] = sample;     // Left channel
         waveform_data[2 * i + 1] = sample; // Right channel
+        // Write data to the waveform data array
+        waveform_data[2 * i] = sample;     // Left channel
+        waveform_data[2 * i + 1] = sample; // Right channel
 
+        // Logging will slow down the process, so it is commented out
+        // // print package
+        // ESP_LOGI(TAG_WAVEFORM, "Sample %d: %d", i, sample);
         // Logging will slow down the process, so it is commented out
         // // print package
         // ESP_LOGI(TAG_WAVEFORM, "Sample %d: %d", i, sample);
