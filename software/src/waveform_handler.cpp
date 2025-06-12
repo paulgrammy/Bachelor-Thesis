@@ -19,6 +19,8 @@ bool is_waveform_running()
 
 void waveform_mode_init()
 {
+    initialize_lookuptables(); // Initialize the lookup tables for waveform data
+
     if (waveformTaskHandle == NULL)
     {
         // Check if the task is already running
@@ -148,64 +150,43 @@ void set_waveform_type(uint8_t waveform_type)
 
 static void generate_wave(int start_index, int end_index)
 {
-    // // Generate waveform data
-    // for (int i = start_index; i < end_index; ++i)
-    // {
+    //Increment phase for the lookup table
+    const float phase_increment = (LUT_SIZE * frequency) / sample_rate;
+    uint32_t phase = 0;  // Using fixed-point instead of float
+    const uint32_t phase_inc = (uint32_t)(phase_increment * 65536.0f);
+
     for (int i = 0; i < N; ++i)
     {
-        int16_t sample = 0; // Initialize sample to zero
-
-        // t is N/fs where N is sample index (in this case, i) and fs is sample rate
-        float t = float(i) / sample_rate;
-
-        // phase angle required for sine and square; 2*pi*f*t
-        float phase = 2.0f * M_PI * frequency * t;
+        //Increment phase for the lookup table
+        int16_t sample = 0;
+        int16_t LUT_index = (int)phase % LUT_SIZE; // Calculate the index for the lookup table
 
         /* sinf is used because it is faster than sin
          * - if sinf is used, there is no need for type conversion
          * - it will also make code faster since it uses single-precision floating point, sin uses double-precision
          * - there won't be any loss of precision since we are using 16-bit signed int
          */
+
         switch (waveform_task_parameters)
         {
         case WAVEFORM_SINE:
-            /* Sine wave = A*sin(2*pi*f*t) = A*sin(phase)
-             * sin(phase) is in the range [-1, 1], so this will generate a continuous value in the range [-A, A]
-             */
-            sample = (int16_t)(amplitude * sinf(phase));
+            sample = sine_lut[LUT_index]; // Use the sine lookup table
             break;
         case WAVEFORM_SQUARE:
-            /* Square wave = A*sign(sin(2*pi*f*t)) = A*sign(phase)
-             * sinf(phase) is in the range [-1, 1], so the if statement will fix sample to either -A or A
-             */
-            if (sinf(phase) > 0)
-            {
-                sample = (int16_t)(amplitude); // Positive half of square wave
-            }
-            else
-            {
-                sample = (int16_t)(-amplitude); // Negative half of square wave
-            }
+            sample = square_lut[LUT_index]; // Use the square lookup table
             break;
         case WAVEFORM_TRIANGLE:
-            /* Triangle wave = A*(2/pi)*asin(sin(2*pi*f*t)) = A*(2/pi)*asin(phase)
-             * sinf(phase) is in the range [-1, 1], so this will generate a continuous value in the range [-A, A]
-             * asin(sin(phase)) is in the range [-pi/2, pi/2], so this will now map the values to [-pi/2, pi/2]
-             * (2/pi) is used to scale the value to the range [-A, A]
-             */
-            sample = (int16_t)(amplitude * (2.0f / M_PI) * asinf(sinf(phase)));
+            sample = triangle_lut[LUT_index]; // Use the triangle lookup table
             break;
         case WAVEFORM_SAWTOOTH:
-            /* Sawtooth wave = A*(2/pi)*(phase - pi) = A*(2/pi)*(phase)
-             * phase is in the range [0, 2*pi], so this will generate a continuous value in the range [-A, A]
-             * (2/pi) is used to scale the value to the range [-A, A]
-             */
-            sample = (int16_t)(amplitude * (2.0f * (fmodf(phase, 2.0f * M_PI) / (2.0f * M_PI)) - 1.0f));
-            ; // Sawtooth from -A to +A
+            sample = infected_lut[LUT_index]; // Use the infected lookup table
             break;
         default:
             break;
         }
+
+        // Increment the phase for the next sample
+        phase += phase_increment;
 
         // Write data to the waveform data array
         waveform_data[2 * i] = sample;     // Left channel
@@ -218,4 +199,33 @@ static void generate_wave(int start_index, int end_index)
     }
 
     waveform_length_bytes = sizeof(waveform_data);
+}
+
+void initialize_lookuptables()
+{
+    for (int i = 0; i < LUT_SIZE; i++)
+    {
+        float phase = 2.0f * M_PI / LUT_SIZE; // Phase increment for the lookup table
+
+        //Sine wave
+        sine_lut[i] = (int16_t)(AMPLITUDE * sinf(phase * i)); // Offset by AMPLITUDE to avoid negative values
+
+        //Square wave
+        if (sinf(phase * i) > 0)
+        {
+            square_lut[i] = AMPLITUDE; // Positive half of square wave
+        }
+        else
+        {
+            square_lut[i] = -AMPLITUDE; // Negative half of square wave
+        }
+
+        //Triangle wave
+        triangle_lut[i] = (int16_t)(2 * amplitude * (fabs(2.0f * (i / (float)LUT_SIZE - 0.5f) - 0.5f)));
+
+        // Infected waveform (pre-calculated hybrid)
+        float infected_phase = 2.0f * M_PI * 150.0f * i / LUT_SIZE;  // 150Hz
+        float sine_phase = 2.0f * M_PI * 1500.0f * i / LUT_SIZE;     // 1.5kHz
+        infected_lut[i] = (int16_t)(amplitude * (0.6f * sinf(infected_phase) + 0.4f * sinf(sine_phase)));
+    }
 }
