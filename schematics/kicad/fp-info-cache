@@ -1,4 +1,4 @@
-24756476050277340
+24759972549443273
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -55236,6 +55236,13 @@ SMD SMT ceramic resonator filter filter hand-soldering
 0
 3
 3
+Custom Holes
+holes
+
+
+0
+0
+0
 Diode_SMD
 D_0201_0603Metric
 Diode SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator
@@ -92949,6 +92956,13 @@ Symbol
 WEEE-Logo_28.1x40mm_SilkScreen
 Waste Electrical and Electronic Equipment Directive
 Logo WEEE
+0
+0
+0
+TH_MA_Logo
+TH_Mannheim_Logo
+
+
 0
 0
 0

@@ -22373,7 +22373,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "911524b2-6c48-458b-93d9-f63f1dee06c5")
-		(property "Reference" "Vo-"
+		(property "Reference" "Vo-1"
 			(at 454.152 80.264 0)
 			(effects
 				(font
@@ -22477,7 +22477,7 @@
 		(instances
 			(project "Studienarbeit"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
-					(reference "Vo-")
+					(reference "Vo-1")
 					(unit 1)
 				)
 			)
@@ -28071,7 +28071,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f4104baf-edab-4bb0-b845-ad49530bff1b")
-		(property "Reference" "Vo+"
+		(property "Reference" "Vo+1"
 			(at 468.376 80.518 0)
 			(effects
 				(font
@@ -28175,7 +28175,7 @@
 		(instances
 			(project "Studienarbeit"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
-					(reference "Vo+")
+					(reference "Vo+1")
 					(unit 1)
 				)
 			)
