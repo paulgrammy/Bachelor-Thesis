@@ -48,7 +48,7 @@ void bypass_event_loop(void *pvParameters)
 {
     ESP_LOGI(TAG_BYPASS_TASK, "Bypass event Loop started...");
 
-    bool last_button_state = true;                              // Default HIGH (pull-up)
+    bool last_button_state = false;                              // Default HIGH (pull-up)
     bool hi_lo_state = false;                                   // Track current hi_lo pin state
 
     while (true)
@@ -58,19 +58,27 @@ void bypass_event_loop(void *pvParameters)
         if (!current_button_state && last_button_state)         // HIGH to LOW transition = button press
         {
             hi_lo_state = !hi_lo_state;                         // Toggle hi_lo pin state
-            gpio_set_level(hi_lo_pin, hi_lo_state ? 1 : 0);     // Set hi_lo pin
-            gpio_set_level(GPIO_NUM_5, 1);                      // LED on
+            gpio_set_level(hi_lo_pin, hi_lo_state);     // Set hi_lo pin
             ESP_LOGI(TAG_BYPASS_TASK, "Button pressed. hi_lo pin toggled to: %d", hi_lo_state);
         }
         else if (current_button_state && !last_button_state)    // LOW to HIGH transition = button release
         {
-            gpio_set_level(GPIO_NUM_5, 0);                      // LED off
             ESP_LOGI(TAG_BYPASS_TASK, "Button released.");
         }
 
+        //Turn on LED if pin is HI
+        if (hi_lo_state) 
+        {
+            gpio_set_level(GPIO_NUM_5, 1);                      // Turn on LED
+        }
+        else 
+        {
+            gpio_set_level(GPIO_NUM_5, 0);                      // Turn off LED
+        }     
+
         last_button_state = current_button_state;               // Update last button state
 
-        vTaskDelay(pdMS_TO_TICKS(100));                          // Debounce delay
+        vTaskDelay(pdMS_TO_TICKS(50));                          // Debounce delay
     }
 }
 
