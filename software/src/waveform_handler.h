@@ -70,14 +70,21 @@ void build_waveform_data(uint8_t waveform_type); // Build waveform data
 
 #define SAMPLE_RATE 44100
 #define FREQUENCY 440
-#define AMPLITUDE 1024
+#define AMPLITUDE 2048
 #define N (SAMPLE_RATE / FREQUENCY)                             // Number of samples per period
+
+#define LUT_SIZE 512                                            // Size of the sine lookup table
+
+static int16_t sine_LUT[LUT_SIZE];
+static int16_t square_LUT[LUT_SIZE];
+static int16_t triangle_LUT[LUT_SIZE];
+static int16_t infected_LUT[LUT_SIZE];
 
 static const float sample_rate = SAMPLE_RATE;
 static const float frequency = FREQUENCY;
 static const float amplitude = AMPLITUDE;
-static int waveform_length_bytes = 0;
-static int16_t waveform_data[N * 2];                            
+static int waveform_length_bytes = LUT_SIZE * 2 * sizeof(int16_t); // Length of the waveform data in bytes
+static int16_t waveform_data[LUT_SIZE * 2];                            
 
 /* This function generates and sends waveform data in chunks to avoid blocking the CPU.
  * It uses the I2S driver to send the data to the DAC.
@@ -89,7 +96,9 @@ static int16_t waveform_data[N * 2];
  * Then interleaving left and right samples to form a stereo output for the PCM5102 DAC. 
  * ESP32 takes care of clocks and timing using DMA. 
  */
-static void generate_wave(int start_index, int end_index);
+static void generate_wave();
+
+void initialize_waveform_LUTs(); // Initialize the waveform lookup tables
 
 /* Waveform task
 */

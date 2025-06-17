@@ -29,6 +29,13 @@ void a2dp_task(void *pvParameters)
     while (true)
     {
         vTaskDelay(pdMS_TO_TICKS(100));
+
+        // If no audio is playing, clear the I2S buffer
+        if (a2dp_sink.get_audio_state() == ESP_A2D_AUDIO_STATE_STOPPED)
+        {
+            ESP_LOGI(TAG_A2DP, "No audio playing, clearing I2S buffer");
+            i2s_zero_dma_buffer(I2S_NUM_0);
+        }
     }
 
     // Should not reach here, but clean up just in case

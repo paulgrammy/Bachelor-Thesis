@@ -81,12 +81,12 @@ void waveform_task(void *pvParameters)
     i2s_config_t i2s_config = {
         .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
         .sample_rate = 44100,
-        .bits_per_sample = (i2s_bits_per_sample_t)16,
+        .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
         .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
         .communication_format = (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S,
         .intr_alloc_flags = 0, // default interrupt priority
         .dma_buf_count = 4,
-        .dma_buf_len = 256,
+        .dma_buf_len = 128,
         .use_apll = false,
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 0, 0)
         .tx_desc_auto_clear =
@@ -139,28 +139,26 @@ void set_waveform_type(uint8_t waveform_type)
     waveform_task_parameters = waveform_type; // Set the current waveform type
 
     // Generate 1 full period of waveform data
-    generate_wave(0, N);
+    generate_wave();
 
     ESP_LOGI(TAG_WAVEFORM, "Waveform buffer cleaned %d, %d", waveform_data[0], waveform_data[1]); // Log the change
 }
 
 // private
 
-static void generate_wave(int start_index, int end_index)
+static void generate_wave()
 {
-    // // Generate waveform data
-    // for (int i = start_index; i < end_index; ++i)
-    // {
-    for (int i = 0; i < N; ++i)
+    // Phase increment for frequency scaling
+    const uint32_t phase_inc = (uint32_t)((LUT_SIZE * frequency * 65536.0f) / sample_rate);
+    
+    float phase = 0;
+
+    for (int i = 0; i < LUT_SIZE; ++i)
     {
         int16_t sample = 0; // Initialize sample to zero
 
-        // t is N/fs where N is sample index (in this case, i) and fs is sample rate
-        float t = float(i) / sample_rate;
-
-        // phase angle required for sine and square; 2*pi*f*t
-        float phase = 2.0f * M_PI * frequency * t;
-
+        uint16_t lut_index = (uint16_t)phase % LUT_SIZE;  // Wrap-around
+        
         /* sinf is used because it is faster than sin
          * - if sinf is used, there is no need for type conversion
          * - it will also make code faster since it uses single-precision floating point, sin uses double-precision
@@ -172,20 +170,13 @@ static void generate_wave(int start_index, int end_index)
             /* Sine wave = A*sin(2*pi*f*t) = A*sin(phase)
              * sin(phase) is in the range [-1, 1], so this will generate a continuous value in the range [-A, A]
              */
-            sample = (int16_t)(amplitude * sinf(phase));
+            sample = sine_LUT[lut_index]; // Use the sine lookup table for sine wave
             break;
         case WAVEFORM_SQUARE:
             /* Square wave = A*sign(sin(2*pi*f*t)) = A*sign(phase)
              * sinf(phase) is in the range [-1, 1], so the if statement will fix sample to either -A or A
              */
-            if (sinf(phase) > 0)
-            {
-                sample = (int16_t)(amplitude); // Positive half of square wave
-            }
-            else
-            {
-                sample = (int16_t)(-amplitude); // Negative half of square wave
-            }
+            sample = square_LUT[lut_index]; // Use the square lookup table for square wave
             break;
         case WAVEFORM_TRIANGLE:
             /* Triangle wave = A*(2/pi)*asin(sin(2*pi*f*t)) = A*(2/pi)*asin(phase)
@@ -193,19 +184,21 @@ static void generate_wave(int start_index, int end_index)
              * asin(sin(phase)) is in the range [-pi/2, pi/2], so this will now map the values to [-pi/2, pi/2]
              * (2/pi) is used to scale the value to the range [-A, A]
              */
-            sample = (int16_t)(amplitude * (2.0f / M_PI) * asinf(sinf(phase)));
+            sample = triangle_LUT[lut_index]; // Use the triangle lookup table for triangle wave
             break;
         case WAVEFORM_SAWTOOTH:
             /* Sawtooth wave = A*(2/pi)*(phase - pi) = A*(2/pi)*(phase)
              * phase is in the range [0, 2*pi], so this will generate a continuous value in the range [-A, A]
              * (2/pi) is used to scale the value to the range [-A, A]
              */
-            sample = (int16_t)(amplitude * (2.0f * (fmodf(phase, 2.0f * M_PI) / (2.0f * M_PI)) - 1.0f));
-            ; // Sawtooth from -A to +A
+            sample = infected_LUT[lut_index]; // Use the infected lookup table for infected wave
             break;
         default:
             break;
         }
+
+        // Increment phase for the next sample
+        phase += phase_inc;
 
         // Write data to the waveform data array
         waveform_data[2 * i] = sample;     // Left channel
@@ -218,4 +211,24 @@ static void generate_wave(int start_index, int end_index)
     }
 
     waveform_length_bytes = sizeof(waveform_data);
+}
+
+void initialize_waveform_LUTs()
+{
+    
+    // Initialize sine lookup table
+    for (int i = 0; i < LUT_SIZE; ++i)
+    {
+        float phase = 2.0f * M_PI * i / LUT_SIZE; // Calculate phase for each index
+
+        sine_LUT[i] = (int16_t)(amplitude * sinf(phase));
+
+        square_LUT[i] = (i < LUT_SIZE / 2) ? amplitude : -amplitude;
+
+        triangle_LUT[i] = (int16_t)(amplitude * (2.0f * i / LUT_SIZE - 1.0f));
+
+        float infected_phase = 2.0f * M_PI * 150.0f * i / LUT_SIZE; // Calculate phase for infected wave
+        float sine_phase = 2.0f * M_PI * 1500.0f * i / LUT_SIZE; // Calculate phase for sine wave
+        infected_LUT[i] = (int16_t)(amplitude * (0.6f * sinf(infected_phase) + 0.4f * sinf(sine_phase)));
+    }
 }
