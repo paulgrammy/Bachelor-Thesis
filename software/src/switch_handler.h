@@ -10,7 +10,7 @@
 // declarations
 #define GPIO_STACK_SIZE 4096 // Stack size for the task
 #define TASK_PRIORITY_SWITCH 3    // Task priority
-#define BYPASS_PIN 1 // GPIO pin for the button
+#define BYPASS_PIN 27 // GPIO pin for the button
 #define HI_LO_PIN 26 // GPIO pin for the high/low signal output pin
 
 // public

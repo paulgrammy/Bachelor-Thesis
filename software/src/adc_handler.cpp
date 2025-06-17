@@ -1,7 +1,7 @@
 #include "adc_handler.h"                                            
 
 #define ADC_CHANNEL ADC2_CHANNEL_3                              // ADC channel for GPIO 15
-#define ADC_ATTENUATION ADC_ATTEN_DB_6                          // ADC attenuation, set for 2.2V max input voltage
+#define ADC_ATTENUATION ADC_ATTEN_DB_11                          // ADC attenuation, set for 2.2V max input voltage
 #define ADC_SAMPLES 64                                          // Number of samples to average
 #define ANALOG_READ_PIN 15                                      // GPIO pin for ADC, default is 15
 #define ADC_WIDTH ADC_WIDTH_BIT_12                              // ADC width, set to 12 bits

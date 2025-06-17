@@ -1,0 +1,25 @@
+@startuml
+skinparam state {
+  BackgroundColor White
+  BorderColor Black
+  FontName Courier
+}
+
+[*] --> Idle
+
+Idle --> ButtonPressed : Button Press Detected
+ButtonPressed : LED on, start timer
+
+ButtonPressed --> ShortPressDetected : Button Released
+ShortPressDetected : LED off\ncycle_waveforms()
+ShortPressDetected --> Idle
+
+ButtonPressed --> LongPressDetected : time > 1s
+LongPressDetected : toggle_operating_mode()
+
+LongPressDetected --> Blinking : Button is being held
+Blinking : LED blinks every 100ms
+
+Blinking --> Idle : Button Released\nLED off
+
+@enduml

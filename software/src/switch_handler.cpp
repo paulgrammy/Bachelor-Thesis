@@ -4,7 +4,7 @@
 static const char *TAG_BYPASS_TASK = "BYPASS_TASK"; // Tag for logging
 static TaskHandle_t bypassTaskHandle = NULL;       // Task handle for the bypass task
 static uint8_t task_parameters;                    // Task parameters, unused but still defined
-static const gpio_num_t bypass_pin = (gpio_num_t)BYPASS_PIN; // GPIO pin for the button, default is 25
+static const gpio_num_t bypass_pin = (gpio_num_t)BYPASS_PIN; // GPIO pin for the button
 static const gpio_num_t hi_lo_pin = (gpio_num_t)HI_LO_PIN; // GPIO pin for the high/low signal output pin
 
 // definitions
@@ -53,7 +53,7 @@ void bypass_event_loop(void *pvParameters)
 
     while (true)
     {
-        bool current_button_state = gpio_get_level(GPIO_NUM_1); // Read button on IO Pin 5 (PULL-UP)
+        bool current_button_state = gpio_get_level(bypass_pin); // Read button on IO Pin 5 (PULL-UP)
 
         if (!current_button_state && last_button_state)         // HIGH to LOW transition = button press
         {
@@ -68,60 +68,20 @@ void bypass_event_loop(void *pvParameters)
             ESP_LOGI(TAG_BYPASS_TASK, "Button released.");
         }
 
+        // //Turn on LED if pin is HI
+        // if (hi_lo_state) 
+        // {
+        //     gpio_set_level(GPIO_NUM_5, 1);                      // Turn on LED
+        // }
+        // else 
+        // {
+        //     gpio_set_level(GPIO_NUM_5, 0);                      // Turn off LED
+        // }     
+
         last_button_state = current_button_state;               // Update last button state
 
-        vTaskDelay(pdMS_TO_TICKS(100));                          // Debounce delay
+        vTaskDelay(pdMS_TO_TICKS(50));                          // Debounce delay
     }
 }
-
-// void bypass_event_loop(void *pvParameters)
-// {
-//     ESP_LOGI(TAG_BYPASS_TASK, "Bypass event loop started...");
-
-//     const TickType_t debounce_delay = pdMS_TO_TICKS(100); // Debounce threshold
-//     const TickType_t poll_interval = pdMS_TO_TICKS(10);  // Polling rate
-
-//     bool last_raw_state = gpio_get_level(bypass_pin);     // Last raw read
-//     bool debounced_state = last_raw_state;                // Stable state
-//     bool hi_lo_state = false;
-
-//     TickType_t last_change_time = xTaskGetTickCount();
-
-//     while (true)
-//     {
-//         bool current_raw = gpio_get_level(bypass_pin);
-//         TickType_t now = xTaskGetTickCount();
-
-//         if (current_raw != last_raw_state)
-//         {
-//             last_change_time = now; // Bouncing or edge detected
-//             last_raw_state = current_raw;
-//         }
-
-//         if ((now - last_change_time) > debounce_delay)
-//         {
-//             if (current_raw != debounced_state)
-//             {
-//                 debounced_state = current_raw;
-
-//                 if (!debounced_state) // Button pressed (active LOW)
-//                 {
-//                     hi_lo_state = !hi_lo_state;
-//                     gpio_set_level(hi_lo_pin, hi_lo_state);
-//                     gpio_set_level(GPIO_NUM_5, 1); // LED on
-//                     ESP_LOGI(TAG_BYPASS_TASK, "Button pressed. hi_lo toggled to: %d", hi_lo_state);
-//                 }
-//                 else // Button released
-//                 {
-//                     gpio_set_level(GPIO_NUM_5, 0); // LED off
-//                     ESP_LOGI(TAG_BYPASS_TASK, "Button released.");
-//                 }
-//             }
-//         }
-
-//         vTaskDelay(poll_interval); // Check again after short delay
-//     }
-// }
-
 
 

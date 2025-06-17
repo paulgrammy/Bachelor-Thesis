@@ -39,6 +39,11 @@ void waveform_mode_init()
     }
 
     //Kickstart generation
+    set_waveform_type(waveform_task_parameters);(waveform_task_parameters);
+
+    vTaskDelay(10);
+
+    // Kickstart generation
     set_waveform_type(waveform_task_parameters);
 
     is_running = true;
@@ -210,6 +215,25 @@ static void generate_wave()
              */
             sample = infected_LUT[lut_index]; // Use the infected lookup table for infected wave
             break;
+        }
+        // case WAVEFORM_SWEEP:
+        // {
+        //     /* Sweep wave = A*sin(2*pi*f*t) = A*sin(phase)
+        //      * This will generate a continuous value in the range [-A, A]
+        //      * The frequency will sweep from 100Hz to 5kHz over the duration of the waveform and loop back to 100Hz
+        //      */
+        //     float sweep_frequency = 100.0f + (4900.0f * (float)i / (float)N); // Sweep from 100Hz to 5kHz
+        //     float sweep_phase = 2.0f * M_PI * sweep_frequency * t; // Calculate the phase for the sweep frequency
+
+        //     //Loop back to 100Hz after reaching 5kHz
+        //     if (sweep_frequency > 5000.0f)
+        //     {
+        //         sweep_frequency = 100.0f; // Reset frequency to 100Hz
+        //         sweep_phase = 2.0f * M_PI * sweep_frequency * t; // Recalculate phase for the reset frequency
+        //     }
+
+        //     sample = (int16_t)(amplitude * sinf(sweep_phase)); // Generate the sample for the sweep frequency
+        //     break;
         default:
             break;
         }
@@ -227,9 +251,12 @@ static void generate_wave()
         // Logging will slow down the process, so it is commented out
         // // print package
         // ESP_LOGI(TAG_WAVEFORM, "Sample %d: %d", i, sample);
+        // Logging will slow down the process, so it is commented out
+        // // print package
+        // ESP_LOGI(TAG_WAVEFORM, "Sample %d: %d", i, sample);
         // }
     }
-
+    
     waveform_length_bytes = sizeof(waveform_data);
 }
 
