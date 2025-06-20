@@ -69,9 +69,9 @@ bool is_waveform_running();
 // private
 
 #define SAMPLE_RATE 44100
-#define FREQUENCY 100
-#define AMPLITUDE 2048
-#define LUT_SIZE 256
+#define FREQUENCY 440
+#define AMPLITUDE 4096
+#define LUT_SIZE 4096
 
 /* This function generates and sends waveform data in chunks to avoid blocking the CPU.
  * It uses the I2S driver to send the data to the DAC.

@@ -32,8 +32,6 @@ bool is_waveform_running()
 
 void waveform_mode_init()
 {
-    initialize_waveform_LUTs(); // Initialize the lookup tables for waveform data
-
     if (waveformTaskHandle == NULL)
     {
         // Check if the task is already running
@@ -50,6 +48,8 @@ void waveform_mode_init()
     {
         ESP_LOGW(TAG_WAVEFORM, "Waveform task already running");
     }
+
+    initialize_waveform_LUTs(); // Initialize the lookup tables for waveform data
 
     vTaskDelay(10);
 
@@ -138,6 +138,8 @@ void waveform_task(void *pvParameters)
     // Main loop
     while (true)
     {
+        generate_wave(); // Generate the waveform data
+
         size_t bytes_written;
         esp_err_t err = i2s_write(I2S_NUM_0, waveform_data, waveform_length_bytes, &bytes_written, portMAX_DELAY);
         if (err != ESP_OK)
@@ -166,6 +168,9 @@ void set_waveform_type(uint8_t waveform_type)
 
 static void generate_wave()
 {
+    // // Reset phase to zero before generating a new waveform
+    // phase = 0;
+
     // Calculate phase increment per sample (Q16.16 fixed point)
     const uint32_t phase_inc = (uint32_t)((frequency * 65536.0f * LUT_SIZE) / sample_rate);
 
@@ -246,8 +251,26 @@ void initialize_waveform_LUTs()
 
         triangle_lut[i] = (int16_t)(amplitude * (2.0f * i / LUT_SIZE - 1.0f));
 
-        float infected_phase = 2.0f * M_PI * 150.0f * i / LUT_SIZE; // Calculate phase for infected wave
-        float sine_phase = 2.0f * M_PI * 1500.0f * i / LUT_SIZE; // Calculate phase for sine wave
-        infected_lut[i] = (int16_t)(amplitude * (0.6f * sinf(infected_phase) + 0.4f * sinf(sine_phase)));
+        // float infected_phase = 2.0f * M_PI * 150.0f * i / LUT_SIZE; // Calculate phase for infected wave
+        // float sine_phase = 2.0f * M_PI * 1500.0f * i / LUT_SIZE; // Calculate phase for sine wave
+        // infected_lut[i] = (int16_t)(amplitude * (0.6f * sinf(infected_phase) + 0.4f * sinf(sine_phase)));
+
+        float t = (float)i / (float)LUT_SIZE; // Normalized time from 0 to 1
+
+                // 220Hz "noise" component 
+        float infection = 0.6f * sinf(2.0f * M_PI * frequency/2 + 
+                      0.3f * sinf(2.0f * M_PI * 5.0f * t));  // 5Hz FM
+        
+        // 1760Hz main component with harmonic relationship
+        float main = 0.4f * sinf(2.0f * M_PI * frequency * t);
+        
+        // Non-linear mixing with soft clipping
+        float infected = tanhf(infection + main);
+        
+        // Optional: Add slight asymmetry for more character
+        if (infected > 0) infected *= 0.9f;
+        
+        infected_lut[i] = (int16_t)(amplitude * infected);
+
     }
 }
