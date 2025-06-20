@@ -3968,6 +3968,147 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Regulator_Linear:LM78M05_TO220"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -3.81 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LM78M05_TO220"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+				(at 0 5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/MC78M00-D.PDF"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Positive 500mA 35V Linear Regulator, Fixed Output 5V, TO-220"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Voltage Regulator 500mA Positive"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "TO?220*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LM78M05_TO220_0_1"
+				(rectangle
+					(start -5.08 1.905)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "LM78M05_TO220_1_1"
+				(pin power_in line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "VI"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "VO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "SJ2-35853B-SMT-TR_1"
 			(pin_names
 				(offset 1.016)
@@ -6601,6 +6742,12 @@
 		(uuid "2a1f604e-1bef-4dc8-b1d3-0c9b3a676f6c")
 	)
 	(junction
+		(at 168.91 157.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2a25fde6-4326-4d59-88c7-7a9e389e4f27")
+	)
+	(junction
 		(at 107.95 168.91)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6665,6 +6812,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "51fef7c5-de70-4cfb-b497-84c8eb934a0e")
+	)
+	(junction
+		(at 146.05 157.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "55161f19-80ca-4837-bb0e-e664c572651d")
 	)
 	(junction
 		(at 396.24 68.58)
@@ -6833,6 +6986,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c4691473-762e-4a86-a65c-14d1591ed7c3")
+	)
+	(junction
+		(at 158.75 165.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c56f18d6-10ac-4dc3-a51d-bd72bba146f3")
 	)
 	(junction
 		(at 256.54 273.05)
@@ -7068,6 +7227,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 160.02) (xy 146.05 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08af15af-5655-42d6-834f-33dfa0c8c843")
+	)
+	(wire
+		(pts
 			(xy 67.31 114.3) (xy 67.31 115.57)
 		)
 		(stroke
@@ -7145,6 +7314,16 @@
 			(type default)
 		)
 		(uuid "0db49dd2-47ba-40bb-a647-f214d505a0c2")
+	)
+	(wire
+		(pts
+			(xy 158.75 165.1) (xy 168.91 165.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f357932-7c44-434b-a41e-77d42f349455")
 	)
 	(wire
 		(pts
@@ -7579,6 +7758,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 157.48) (xy 151.13 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31c9a4ad-ee3b-4019-9944-1654db7b3b0c")
+	)
+	(wire
+		(pts
 			(xy 63.5 279.4) (xy 63.5 292.1)
 		)
 		(stroke
@@ -7756,6 +7945,16 @@
 			(type default)
 		)
 		(uuid "426ef120-709b-4b8a-8edc-7a0d831b2532")
+	)
+	(wire
+		(pts
+			(xy 142.24 157.48) (xy 146.05 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "435e9073-6aa3-4a13-bda3-189a48b90599")
 	)
 	(wire
 		(pts
@@ -8176,6 +8375,16 @@
 			(type default)
 		)
 		(uuid "6405a7f6-6cfc-454d-ad7d-4798d6ba8f16")
+	)
+	(wire
+		(pts
+			(xy 146.05 165.1) (xy 158.75 165.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6412ea2f-65e3-416e-98bd-730a06e4521b")
 	)
 	(wire
 		(pts
@@ -8601,6 +8810,16 @@
 	)
 	(wire
 		(pts
+			(xy 168.91 157.48) (xy 172.72 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88d17479-364e-4c30-9e5b-93a10f389b1b")
+	)
+	(wire
+		(pts
 			(xy 107.95 60.96) (xy 114.3 60.96)
 		)
 		(stroke
@@ -8821,6 +9040,16 @@
 	)
 	(wire
 		(pts
+			(xy 166.37 157.48) (xy 168.91 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9995832b-d79d-4c5e-b7fc-1b47a9723009")
+	)
+	(wire
+		(pts
 			(xy 113.03 251.46) (xy 121.92 251.46)
 		)
 		(stroke
@@ -8958,6 +9187,16 @@
 			(type default)
 		)
 		(uuid "a52d9b85-ee9a-4ef4-bfc6-b7b699141011")
+	)
+	(wire
+		(pts
+			(xy 168.91 157.48) (xy 168.91 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a585869e-fdaa-4016-8730-c961b19305c3")
 	)
 	(wire
 		(pts
@@ -9832,6 +10071,16 @@
 			(color 255 0 0 1)
 		)
 		(uuid "e6a7da70-2f1c-4e35-b15f-8d54f3621d14")
+	)
+	(wire
+		(pts
+			(xy 158.75 165.1) (xy 158.75 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e79d6aba-89a9-46fd-8a0b-9cab2b34f5c5")
 	)
 	(wire
 		(pts
@@ -10752,6 +11001,42 @@
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 		)
 	)
@@ -11417,28 +11702,6 @@
 			)
 		)
 	)
-	(global_label "+15V_Diode"
-		(shape input)
-		(at 52.07 114.3 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "1bd75552-319d-43c1-8f02-2913bbdb4892")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 37.7758 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "+3v3_ESP"
 		(shape input)
 		(at 59.69 284.48 180)
@@ -11505,6 +11768,28 @@
 			)
 		)
 	)
+	(global_label "+15V_Diode"
+		(shape input)
+		(at 142.24 157.48 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "607338b3-a34a-4014-84a6-e231f1b677c4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 127.9458 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "+5V1"
 		(shape input)
 		(at 132.08 114.3 0)
@@ -11567,6 +11852,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "+6.5V"
+		(shape input)
+		(at 52.07 114.3 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "90d7ac1b-49f0-44cc-ae49-6a74bb30af39")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.4 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -11677,6 +11984,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "+6.5V"
+		(shape input)
+		(at 172.72 157.48 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ae5fb5f9-7787-4ec2-afbc-aba5a4a6138f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 181.39 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -16397,6 +16726,136 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C_Small")
+		(at 146.05 162.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3a8216b4-4d12-478c-a846-18a1b8f95abb")
+		(property "Reference" "C34"
+			(at 140.208 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 139.192 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_Digikey" ""
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_Mouser" "581-1206YC106KAT4A"
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Comments" "16V, X7R, 1206"
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Double Checked" "x"
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Replacement Part" ""
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description_1" "input/gnd"
+			(at 146.05 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fb7bc938-9c75-4834-b39a-0b824d8691a3")
+		)
+		(pin "2"
+			(uuid "e20649b4-d89f-4706-9755-646a1aa1949b")
+		)
+		(instances
+			(project "Thesis Remake"
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "C34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 532.13 110.49 0)
 		(unit 1)
@@ -20245,6 +20704,78 @@
 		)
 	)
 	(symbol
+		(lib_id "Regulator_Linear:LM78M05_TO220")
+		(at 158.75 157.48 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "72508345-759f-4038-b637-4aa67a155e1b")
+		(property "Reference" "U4"
+			(at 158.75 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LM78M05_TO220"
+			(at 158.75 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+			(at 158.75 151.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/MC78M00-D.PDF"
+			(at 158.75 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Positive 500mA 35V Linear Regulator, Fixed Output 5V, TO-220"
+			(at 158.75 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "26fff985-0736-4a26-827a-4d7c89904351")
+		)
+		(pin "3"
+			(uuid "137ebb93-a940-4831-a337-66ba8ed0fd34")
+		)
+		(pin "1"
+			(uuid "418fcc5d-c83a-413b-8efe-9f63c9e6ad54")
+		)
+		(instances
+			(project ""
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "U4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 189.23 358.14 270)
 		(unit 1)
@@ -20663,6 +21194,136 @@
 			(project "Thesis Remake"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
 					(reference "#PWR053")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 168.91 162.56 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7cd2a169-0756-406a-ab19-cd04d6ee7079")
+		(property "Reference" "C35"
+			(at 173.99 161.544 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 176.276 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_Digikey" ""
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_Mouser" "963-LMK316ABJ226MLHT"
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Comments" "6.3 VDC, 22uF, 1206, X7R"
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Double Checked" "x"
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Replacement Part" ""
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description_1" "regulation during transients, datasheet recommendation"
+			(at 168.91 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "382842aa-0581-4215-871d-46e44d44c17d")
+		)
+		(pin "2"
+			(uuid "843235e7-58a4-44f0-a54a-c84cacac0bf2")
+		)
+		(instances
+			(project "Thesis Remake"
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "C35")
 					(unit 1)
 				)
 			)
@@ -22373,7 +23034,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "911524b2-6c48-458b-93d9-f63f1dee06c5")
-		(property "Reference" "Vo-"
+		(property "Reference" "Vo-1"
 			(at 454.152 80.264 0)
 			(effects
 				(font
@@ -22477,7 +23138,7 @@
 		(instances
 			(project "Studienarbeit"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
-					(reference "Vo-")
+					(reference "Vo-1")
 					(unit 1)
 				)
 			)
@@ -27711,6 +28372,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 158.75 167.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f025dc49-501e-4ceb-98d8-9bcf4762884a")
+		(property "Reference" "#PWR049"
+			(at 158.75 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 158.75 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 158.75 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 158.75 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 158.75 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ef03863a-09e3-46af-ad5f-9ac54b32eb51")
+		)
+		(instances
+			(project "Thesis Remake"
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "#PWR049")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 114.3 64.77 180)
 		(unit 1)
@@ -28071,7 +28797,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f4104baf-edab-4bb0-b845-ad49530bff1b")
-		(property "Reference" "Vo+"
+		(property "Reference" "Vo+1"
 			(at 468.376 80.518 0)
 			(effects
 				(font
@@ -28175,7 +28901,7 @@
 		(instances
 			(project "Studienarbeit"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
-					(reference "Vo+")
+					(reference "Vo+1")
 					(unit 1)
 				)
 			)
