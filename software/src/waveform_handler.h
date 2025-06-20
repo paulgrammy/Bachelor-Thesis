@@ -32,7 +32,7 @@ typedef enum
     WAVEFORM_SQUARE,
     WAVEFORM_TRIANGLE,
     WAVEFORM_INFECTED,
-    WAVEFORM_SWEEP,
+    WAVEFORM_SWEEP // Sweep wave, not implemented yet
 } waveform_type_t;
 
 /* Start waveform mode
@@ -66,36 +66,12 @@ void set_waveform_type(uint8_t waveform_type); // Set the current waveform type
  */
 bool is_waveform_running();
 
-void build_waveform_data(uint8_t waveform_type); // Build waveform data
-
 // private
 
 #define SAMPLE_RATE 44100
-#define FREQUENCY 440
+#define FREQUENCY 100
 #define AMPLITUDE 2048
-#define N (SAMPLE_RATE / FREQUENCY)                             // Number of samples per period
-
 #define LUT_SIZE 256
-
-
-#define LUT_SIZE 512                                            // Size of the sine lookup table
-
-static int16_t sine_LUT[LUT_SIZE];
-static int16_t square_LUT[LUT_SIZE];
-static int16_t triangle_LUT[LUT_SIZE];
-static int16_t infected_LUT[LUT_SIZE];
-
-static const float sample_rate = SAMPLE_RATE;
-static const float frequency = FREQUENCY;
-static const float amplitude = AMPLITUDE;
-static int waveform_length_bytes = LUT_SIZE * 2 * sizeof(int16_t); // Length of the waveform data in bytes
-static int16_t waveform_data[LUT_SIZE * 2];                            
-
-static uint16_t sine_lut[LUT_SIZE]; // Lookup table for sine wave
-static uint16_t square_lut[LUT_SIZE]; // Lookup table for square wave
-static uint16_t triangle_lut[LUT_SIZE]; // Lookup table for triangle wave
-static uint16_t infected_lut[LUT_SIZE]; // Lookup table for infected wave
-static uint16_t sweep_lut[LUT_SIZE]; // Lookup table for sweep wave
 
 /* This function generates and sends waveform data in chunks to avoid blocking the CPU.
  * It uses the I2S driver to send the data to the DAC.
@@ -110,8 +86,6 @@ static uint16_t sweep_lut[LUT_SIZE]; // Lookup table for sweep wave
 static void generate_wave();
 
 void initialize_waveform_LUTs(); // Initialize the waveform lookup tables
-
-void initialize_lookuptables(); // Initialize lookup tables for waveforms
 
 /* Waveform task
  */

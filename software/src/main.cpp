@@ -12,9 +12,9 @@ static const char *TAG_MAIN = "MAIN";
 void setup()
 {
     // Disable UART0 to free GPIO1 before setting up the bypass task, required for button 
-    ESP_LOGI(TAG_MAIN, "Disabling UART...");
-    uart_driver_delete(UART_NUM_0);
-    gpio_reset_pin(GPIO_NUM_1);
+    // ESP_LOGI(TAG_MAIN, "Disabling UART...");
+    // uart_driver_delete(UART_NUM_0);
+    // gpio_reset_pin(GPIO_NUM_1);
 
     ESP_LOGI(TAG_MAIN, "Starting setup...");
 
