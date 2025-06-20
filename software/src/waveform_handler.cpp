@@ -18,6 +18,7 @@ static const float sample_rate = SAMPLE_RATE;
 static const float frequency = FREQUENCY;
 static const float amplitude = AMPLITUDE;
 static uint32_t phase = 0; 
+static uint32_t phase_infected = 0; // Phase for the infected wave
 #define WAVEFORM_NUM_SAMPLES 256
 static int16_t waveform_data[WAVEFORM_NUM_SAMPLES * 2]; // Stereo (L+R) samples
 static int waveform_length_bytes = WAVEFORM_NUM_SAMPLES * 2 * sizeof(int16_t); // Length of the waveform data in bytes
@@ -174,10 +175,14 @@ static void generate_wave()
     // Calculate phase increment per sample (Q16.16 fixed point)
     const uint32_t phase_inc = (uint32_t)((frequency * 65536.0f * LUT_SIZE) / sample_rate);
 
+    const uint32_t infected_phase_inc = (uint32_t)((frequency/(2.0f) * 65536.0f * LUT_SIZE) / sample_rate);
+
     for (int i = 0; i < WAVEFORM_NUM_SAMPLES; ++i)
     {
         // int16_t lut_index = (int)phase % LUT_SIZE; // Calculate the index for the lookup table
         uint16_t lut_index = (phase >> 16) % LUT_SIZE;
+
+        uint16_t infected_lut_index = (phase >> 16) % LUT_SIZE;
 
         //Increment phase for the lookup table
         int16_t sample = 0;
@@ -215,7 +220,7 @@ static void generate_wave()
              * phase is in the range [0, 2*pi], so this will generate a continuous value in the range [-A, A]
              * (2/pi) is used to scale the value to the range [-A, A]
              */
-            sample = infected_lut[lut_index]; // Use the infected lookup table for infected wave
+            sample = 0.5f * infected_lut[infected_lut_index] + 0.5f * triangle_lut[lut_index]; // Use the infected lookup table for infected wave
             break;
         case WAVEFORM_SWEEP:
             break;
@@ -229,6 +234,8 @@ static void generate_wave()
 
         // Increment phase for the next sample
         phase += phase_inc;
+
+        phase_infected += infected_phase_inc;
 
         // Logging will slow down the process, so it is commented out
         // // print package
@@ -249,7 +256,7 @@ void initialize_waveform_LUTs()
 
         square_lut[i] = (i < LUT_SIZE / 2) ? amplitude : -amplitude;
 
-        triangle_lut[i] = (int16_t)(amplitude * (2.0f * i / LUT_SIZE - 1.0f));
+        // triangle_lut[i] = (int16_t)(amplitude * (2.0f * i / LUT_SIZE - 1.0f));
 
         // float infected_phase = 2.0f * M_PI * 150.0f * i / LUT_SIZE; // Calculate phase for infected wave
         // float sine_phase = 2.0f * M_PI * 1500.0f * i / LUT_SIZE; // Calculate phase for sine wave
@@ -257,20 +264,15 @@ void initialize_waveform_LUTs()
 
         float t = (float)i / (float)LUT_SIZE; // Normalized time from 0 to 1
 
-                // 220Hz "noise" component 
-        float infection = 0.6f * sinf(2.0f * M_PI * frequency/2 + 
-                      0.3f * sinf(2.0f * M_PI * 5.0f * t));  // 5Hz FM
+        //float infection = 0.6f * sinf(2.0f * M_PI * frequency/2.0f * t);  
         
-        // 1760Hz main component with harmonic relationship
-        float main = 0.4f * sinf(2.0f * M_PI * frequency * t);
-        
-        // Non-linear mixing with soft clipping
-        float infected = tanhf(infection + main);
-        
-        // Optional: Add slight asymmetry for more character
-        if (infected > 0) infected *= 0.9f;
-        
-        infected_lut[i] = (int16_t)(amplitude * infected);
 
+        float main = 0.4f * sinf(phase * 4.0f);
+        
+        float infected = 0.6f * sinf(phase);
+
+        triangle_lut[i] = (int16_t)(amplitude * main);
+
+        infected_lut[i] = (int16_t)(amplitude * (infected));
     }
 }
