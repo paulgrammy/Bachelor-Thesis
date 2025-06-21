@@ -13,6 +13,7 @@ static int16_t sine_lut[LUT_SIZE];
 static int16_t square_lut[LUT_SIZE];
 static int16_t triangle_lut[LUT_SIZE];
 static int16_t infected_lut[LUT_SIZE];
+static int16_t main_signal_lut[LUT_SIZE]; 
 
 static const float sample_rate = SAMPLE_RATE;
 static const float frequency = FREQUENCY;
@@ -169,19 +170,18 @@ void set_waveform_type(uint8_t waveform_type)
 
 static void generate_wave()
 {
-    // // Reset phase to zero before generating a new waveform
-    // phase = 0;
-
     // Calculate phase increment per sample (Q16.16 fixed point)
     const uint32_t phase_inc = (uint32_t)((frequency * 65536.0f * LUT_SIZE) / sample_rate);
 
+    // Calculate infected phase increment per sample (Q16.16 fixed point)
     const uint32_t infected_phase_inc = (uint32_t)((frequency/(2.0f) * 65536.0f * LUT_SIZE) / sample_rate);
 
     for (int i = 0; i < WAVEFORM_NUM_SAMPLES; ++i)
     {
-        // int16_t lut_index = (int)phase % LUT_SIZE; // Calculate the index for the lookup table
+        // Calculate the index for the lookup table
         uint16_t lut_index = (phase >> 16) % LUT_SIZE;
 
+        // Calculate the index for the infected lookup table
         uint16_t infected_lut_index = (phase >> 16) % LUT_SIZE;
 
         //Increment phase for the lookup table
@@ -192,7 +192,6 @@ static void generate_wave()
          * - it will also make code faster since it uses single-precision floating point, sin uses double-precision
          * - there won't be any loss of precision since we are using 16-bit signed int
          */
-
         switch (waveform_task_parameters)
         {
         case WAVEFORM_SINE:
@@ -220,7 +219,7 @@ static void generate_wave()
              * phase is in the range [0, 2*pi], so this will generate a continuous value in the range [-A, A]
              * (2/pi) is used to scale the value to the range [-A, A]
              */
-            sample = 0.5f * infected_lut[infected_lut_index] + 0.5f * triangle_lut[lut_index]; // Use the infected lookup table for infected wave
+            sample = 1.5 * (0.5f * infected_lut[infected_lut_index] + 0.5f * main_signal_lut[lut_index]);
             break;
         case WAVEFORM_SWEEP:
             break;
@@ -234,7 +233,6 @@ static void generate_wave()
 
         // Increment phase for the next sample
         phase += phase_inc;
-
         phase_infected += infected_phase_inc;
 
         // Logging will slow down the process, so it is commented out
@@ -256,23 +254,14 @@ void initialize_waveform_LUTs()
 
         square_lut[i] = (i < LUT_SIZE / 2) ? amplitude : -amplitude;
 
-        // triangle_lut[i] = (int16_t)(amplitude * (2.0f * i / LUT_SIZE - 1.0f));
-
-        // float infected_phase = 2.0f * M_PI * 150.0f * i / LUT_SIZE; // Calculate phase for infected wave
-        // float sine_phase = 2.0f * M_PI * 1500.0f * i / LUT_SIZE; // Calculate phase for sine wave
-        // infected_lut[i] = (int16_t)(amplitude * (0.6f * sinf(infected_phase) + 0.4f * sinf(sine_phase)));
+        triangle_lut[i] = (int16_t)(amplitude * (2.0f * i / LUT_SIZE - 1.0f));
 
         float t = (float)i / (float)LUT_SIZE; // Normalized time from 0 to 1
 
-        //float infection = 0.6f * sinf(2.0f * M_PI * frequency/2.0f * t);  
-        
-
         float main = 0.4f * sinf(phase * 4.0f);
-        
         float infected = 0.6f * sinf(phase);
 
-        triangle_lut[i] = (int16_t)(amplitude * main);
-
+        main_signal_lut[i] = (int16_t)(amplitude * main);
         infected_lut[i] = (int16_t)(amplitude * (infected));
     }
 }
