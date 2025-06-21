@@ -3968,147 +3968,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Regulator_Linear:LM78M05_TO220"
-			(pin_names
-				(offset 0.254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at -3.81 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "LM78M05_TO220"
-				(at 0 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-				(at 0 5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/MC78M00-D.PDF"
-				(at 0 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Positive 500mA 35V Linear Regulator, Fixed Output 5V, TO-220"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Voltage Regulator 500mA Positive"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "TO?220*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "LM78M05_TO220_0_1"
-				(rectangle
-					(start -5.08 1.905)
-					(end 5.08 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "LM78M05_TO220_1_1"
-				(pin power_in line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "VI"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -7.62 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "VO"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "SJ2-35853B-SMT-TR_1"
 			(pin_names
 				(offset 1.016)
@@ -5457,6 +5316,248 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "TSR_0.5-2465:TSR_0.5-2465"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "PS"
+				(at -10.16 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+				)
+			)
+			(property "Value" "TSR_0.5-2465"
+				(at -10.16 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Footprint" "TSR_0.5-2465:CONV_TSR_0.5-2465"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MF" "Traco Power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MAXIMUM_PACKAGE_HEIGHT" "10.7mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Package" "SIP-3 Traco Power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Price" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Check_prices" "https://www.snapeda.com/parts/TSR%200.5-2465/Traco+Power/view-part/?ref=eda"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "STANDARD" "IPC-7351B"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "PARTREV" "Feb 9, 2021"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/TSR%200.5-2465/Traco+Power/view-part/?ref=snap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MP" "TSR 0.5-2465"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Description_1" "0.5 Amp POL switching regulator, wide input range, pos.-pos. circuit, LM78 compatible, SIP-3"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Availability" "In Stock"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MANUFACTURER" "Traco Power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(symbol "TSR_0.5-2465_0_0"
+				(rectangle
+					(start -10.16 -5.08)
+					(end 10.16 5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -15.24 2.54 0)
+					(length 5.08)
+					(name "+VIN"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 2.54 180)
+					(length 5.08)
+					(name "+VOUT"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 15.24 -2.54 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:+15V"
 			(power)
 			(pin_numbers
@@ -6724,6 +6825,12 @@
 		(uuid "205d3704-280d-4863-aed3-9192ca937f02")
 	)
 	(junction
+		(at 377.19 261.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "23f3d317-366d-4c83-89fe-a22aa1b7f722")
+	)
+	(junction
 		(at 546.1 100.33)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6742,7 +6849,7 @@
 		(uuid "2a1f604e-1bef-4dc8-b1d3-0c9b3a676f6c")
 	)
 	(junction
-		(at 168.91 157.48)
+		(at 420.37 261.62)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2a25fde6-4326-4d59-88c7-7a9e389e4f27")
@@ -6812,12 +6919,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "51fef7c5-de70-4cfb-b497-84c8eb934a0e")
-	)
-	(junction
-		(at 146.05 157.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "55161f19-80ca-4837-bb0e-e664c572651d")
 	)
 	(junction
 		(at 396.24 68.58)
@@ -6986,12 +7087,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c4691473-762e-4a86-a65c-14d1591ed7c3")
-	)
-	(junction
-		(at 158.75 165.1)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c56f18d6-10ac-4dc3-a51d-bd72bba146f3")
 	)
 	(junction
 		(at 256.54 273.05)
@@ -7227,7 +7322,7 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 160.02) (xy 146.05 157.48)
+			(xy 377.19 264.16) (xy 377.19 261.62)
 		)
 		(stroke
 			(width 0)
@@ -7244,6 +7339,16 @@
 			(type default)
 		)
 		(uuid "091e3e0c-2c94-4eea-ba15-eb2d639b49be")
+	)
+	(wire
+		(pts
+			(xy 377.19 261.62) (xy 379.73 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "094b56b9-62de-45ea-8e76-70a3347f9dc5")
 	)
 	(wire
 		(pts
@@ -7314,16 +7419,6 @@
 			(type default)
 		)
 		(uuid "0db49dd2-47ba-40bb-a647-f214d505a0c2")
-	)
-	(wire
-		(pts
-			(xy 158.75 165.1) (xy 168.91 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0f357932-7c44-434b-a41e-77d42f349455")
 	)
 	(wire
 		(pts
@@ -7758,16 +7853,6 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 157.48) (xy 151.13 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "31c9a4ad-ee3b-4019-9944-1654db7b3b0c")
-	)
-	(wire
-		(pts
 			(xy 63.5 279.4) (xy 63.5 292.1)
 		)
 		(stroke
@@ -7948,7 +8033,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 157.48) (xy 146.05 157.48)
+			(xy 372.11 261.62) (xy 377.19 261.62)
 		)
 		(stroke
 			(width 0)
@@ -8378,16 +8463,6 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 165.1) (xy 158.75 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6412ea2f-65e3-416e-98bd-730a06e4521b")
-	)
-	(wire
-		(pts
 			(xy 330.2 81.28) (xy 335.28 81.28)
 		)
 		(stroke
@@ -8810,7 +8885,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 157.48) (xy 172.72 157.48)
+			(xy 420.37 261.62) (xy 424.18 261.62)
 		)
 		(stroke
 			(width 0)
@@ -9040,16 +9115,6 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 157.48) (xy 168.91 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9995832b-d79d-4c5e-b7fc-1b47a9723009")
-	)
-	(wire
-		(pts
 			(xy 113.03 251.46) (xy 121.92 251.46)
 		)
 		(stroke
@@ -9190,7 +9255,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 157.48) (xy 168.91 160.02)
+			(xy 420.37 261.62) (xy 420.37 264.16)
 		)
 		(stroke
 			(width 0)
@@ -10002,6 +10067,16 @@
 	)
 	(wire
 		(pts
+			(xy 410.21 261.62) (xy 420.37 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3754c78-ebfd-4cad-a5a9-5a50967370ba")
+	)
+	(wire
+		(pts
 			(xy 346.71 142.24) (xy 359.41 142.24)
 		)
 		(stroke
@@ -10074,7 +10149,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 165.1) (xy 158.75 167.64)
+			(xy 410.21 266.7) (xy 410.21 269.24)
 		)
 		(stroke
 			(width 0)
@@ -11037,6 +11112,42 @@
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 		)
 	)
@@ -11770,7 +11881,7 @@
 	)
 	(global_label "+15V_Diode"
 		(shape input)
-		(at 142.24 157.48 180)
+		(at 372.11 261.62 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11780,7 +11891,7 @@
 		)
 		(uuid "607338b3-a34a-4014-84a6-e231f1b677c4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 127.9458 157.48 0)
+			(at 357.8158 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11990,7 +12101,7 @@
 	)
 	(global_label "+6.5V"
 		(shape input)
-		(at 172.72 157.48 0)
+		(at 424.18 261.62 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12000,7 +12111,7 @@
 		)
 		(uuid "ae5fb5f9-7787-4ec2-afbc-aba5a4a6138f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 181.39 157.48 0)
+			(at 432.85 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16727,7 +16838,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 146.05 162.56 0)
+		(at 377.19 266.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16735,7 +16846,7 @@
 		(dnp no)
 		(uuid "3a8216b4-4d12-478c-a846-18a1b8f95abb")
 		(property "Reference" "C34"
-			(at 140.208 161.29 0)
+			(at 371.348 265.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16744,7 +16855,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 139.192 163.83 0)
+			(at 370.332 267.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16753,7 +16864,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16762,7 +16873,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16771,7 +16882,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16780,7 +16891,7 @@
 			)
 		)
 		(property "OC_Digikey" ""
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16789,7 +16900,7 @@
 			)
 		)
 		(property "OC_Mouser" "581-1206YC106KAT4A"
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16798,7 +16909,7 @@
 			)
 		)
 		(property "Comments" "16V, X7R, 1206"
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16807,7 +16918,7 @@
 			)
 		)
 		(property "Double Checked" "x"
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16816,7 +16927,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16824,7 +16935,7 @@
 			)
 		)
 		(property "Replacement Part" ""
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16832,7 +16943,7 @@
 			)
 		)
 		(property "Description_1" "input/gnd"
-			(at 146.05 162.56 0)
+			(at 377.19 266.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18154,6 +18265,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 420.37 269.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4b8dbda1-583d-4a43-8581-1f86294be922")
+		(property "Reference" "#PWR055"
+			(at 420.37 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 420.37 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 420.37 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 420.37 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 420.37 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a0082ddb-5476-470d-8a3c-24dcb7e8224f")
+		)
+		(instances
+			(project "Thesis Remake"
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "#PWR055")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+15V")
 		(at 44.45 48.26 0)
 		(unit 1)
@@ -18344,6 +18520,198 @@
 			(project "Studienarbeit"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
 					(reference "C18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TSR_0.5-2465:TSR_0.5-2465")
+		(at 394.97 264.16 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "50628383-e9c9-47c9-8504-0be2c6b08bba")
+		(property "Reference" "PS1"
+			(at 394.97 254 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TSR_0.5-2465"
+			(at 394.97 256.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TSR_0.5-2465:CONV_TSR_0.5-2465"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Traco Power"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "10.7mm"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "SIP-3 Traco Power"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/TSR%200.5-2465/Traco+Power/view-part/?ref=eda"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" "IPC-7351B"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" "Feb 9, 2021"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/TSR%200.5-2465/Traco+Power/view-part/?ref=snap"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "TSR 0.5-2465"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "0.5 Amp POL switching regulator, wide input range, pos.-pos. circuit, LM78 compatible, SIP-3"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "In Stock"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Traco Power"
+			(at 394.97 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "d2bf9b93-4976-4b5b-810f-e810b0091cc5")
+		)
+		(pin "1"
+			(uuid "765849c1-cb57-47b4-a47e-bc69915d9e80")
+		)
+		(pin "2"
+			(uuid "cbaf2cae-31dd-4e95-b705-426a036d72c3")
+		)
+		(instances
+			(project ""
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "PS1")
 					(unit 1)
 				)
 			)
@@ -20704,78 +21072,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Regulator_Linear:LM78M05_TO220")
-		(at 158.75 157.48 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "72508345-759f-4038-b637-4aa67a155e1b")
-		(property "Reference" "U4"
-			(at 158.75 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LM78M05_TO220"
-			(at 158.75 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
-			(at 158.75 151.765 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/MC78M00-D.PDF"
-			(at 158.75 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Positive 500mA 35V Linear Regulator, Fixed Output 5V, TO-220"
-			(at 158.75 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "26fff985-0736-4a26-827a-4d7c89904351")
-		)
-		(pin "3"
-			(uuid "137ebb93-a940-4831-a337-66ba8ed0fd34")
-		)
-		(pin "1"
-			(uuid "418fcc5d-c83a-413b-8efe-9f63c9e6ad54")
-		)
-		(instances
-			(project ""
-				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
-					(reference "U4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 189.23 358.14 270)
 		(unit 1)
@@ -21194,136 +21490,6 @@
 			(project "Thesis Remake"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
 					(reference "#PWR053")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 168.91 162.56 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7cd2a169-0756-406a-ab19-cd04d6ee7079")
-		(property "Reference" "C35"
-			(at 173.99 161.544 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "22uF"
-			(at 176.276 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "OC_Digikey" ""
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "OC_Mouser" "963-LMK316ABJ226MLHT"
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Comments" "6.3 VDC, 22uF, 1206, X7R"
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Double Checked" "x"
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Replacement Part" ""
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" "regulation during transients, datasheet recommendation"
-			(at 168.91 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "382842aa-0581-4215-871d-46e44d44c17d")
-		)
-		(pin "2"
-			(uuid "843235e7-58a4-44f0-a54a-c84cacac0bf2")
-		)
-		(instances
-			(project "Thesis Remake"
-				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
-					(reference "C35")
 					(unit 1)
 				)
 			)
@@ -23053,7 +23219,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.5x1.5mm"
+		(property "Footprint" "TestPoint:TestPoint_Pad_2.5x2.5mm"
 			(at 461.01 86.36 0)
 			(effects
 				(font
@@ -23408,6 +23574,136 @@
 			(project "Thesis Remake"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
 					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 420.37 266.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "97f73ae5-6a94-41bf-a821-521a35c4f6a1")
+		(property "Reference" "C35"
+			(at 414.528 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 413.512 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_Digikey" ""
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_Mouser" "581-1206YC106KAT4A"
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Comments" "16V, X7R, 1206"
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Double Checked" "x"
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Replacement Part" ""
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description_1" "input/gnd"
+			(at 420.37 266.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0859fcd9-f321-4b6d-9ad9-474898bab997")
+		)
+		(pin "2"
+			(uuid "0a7ba79f-bfe9-4a15-a80e-30cf5fd432a2")
+		)
+		(instances
+			(project "Thesis Remake"
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "C35")
 					(unit 1)
 				)
 			)
@@ -23929,6 +24225,71 @@
 			(project "Studienarbeit"
 				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
 					(reference "#PWR043")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 377.19 269.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a8dc6bb8-d7a1-4ee9-aa6b-fb6f4c4ba714")
+		(property "Reference" "#PWR069"
+			(at 377.19 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 377.19 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 377.19 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 377.19 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 377.19 269.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a83031b5-4e58-45bb-ba71-00d05189a138")
+		)
+		(instances
+			(project "Thesis Remake"
+				(path "/e1f471d3-f850-4433-b54a-c7e6f7857097"
+					(reference "#PWR069")
 					(unit 1)
 				)
 			)
@@ -28373,7 +28734,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 158.75 167.64 0)
+		(at 410.21 269.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -28381,7 +28742,7 @@
 		(dnp no)
 		(uuid "f025dc49-501e-4ceb-98d8-9bcf4762884a")
 		(property "Reference" "#PWR049"
-			(at 158.75 173.99 0)
+			(at 410.21 275.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28390,7 +28751,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 158.75 172.72 0)
+			(at 410.21 274.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28398,7 +28759,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 158.75 167.64 0)
+			(at 410.21 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28407,7 +28768,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 158.75 167.64 0)
+			(at 410.21 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28416,7 +28777,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 158.75 167.64 0)
+			(at 410.21 269.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
