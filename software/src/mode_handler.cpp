@@ -2,6 +2,7 @@
 
 static const char *TAG_MODE = "MODE";                 // Tag for logging
 static operating_mode_t current_mode = MODE_WAVEFORM; // Default mode
+static gpio_num_t mode_pin = (gpio_num_t)MODE_PIN; // GPIO pin for the internal LED
 
 // definitions
 void set_operating_mode(operating_mode_t mode)
@@ -37,6 +38,10 @@ void toggle_operating_mode(void)
         }
 
         waveform_mode_init();
+
+        gpio_set_direction(MODE_PIN, GPIO_MODE_OUTPUT); // Set the mode pin as output
+        gpio_set_level(MODE_PIN, 1); // Set the internal LED to HIGH
+
         ESP_LOGI(TAG_MODE, "Switched to WAVEFORM mode");
     }
     else
@@ -55,7 +60,13 @@ void toggle_operating_mode(void)
             }
             vTaskDelay(pdMS_TO_TICKS(10)); // Wait for Waveform to stop
         }
+
         bluetooth_mode_init(); // Restart Bluetooth
+        
+        //Blink the LED while in this mode
+        gpio_set_direction(MODE_PIN, GPIO_MODE_OUTPUT); // Set the mode pin as output
+        gpio_set_level(MODE_PIN, 0); // Set the internal LED to LOW
+
         ESP_LOGI(TAG_MODE, "Switched to BLUETOOTH mode");
     }
 }

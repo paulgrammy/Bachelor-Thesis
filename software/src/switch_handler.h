@@ -12,6 +12,7 @@
 #define TASK_PRIORITY_SWITCH 3    // Task priority
 #define BYPASS_PIN 27 // GPIO pin for the button
 #define HI_LO_PIN 26 // GPIO pin for the high/low signal output pin
+#define BYPASS_LED_PIN GPIO_NUM_5 // GPIO pin for the bypass LED
 
 // public
 

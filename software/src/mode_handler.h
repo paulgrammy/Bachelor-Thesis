@@ -7,6 +7,8 @@
 #include "bluetooth_handler.h"       
 #include "waveform_handler.h"         // Include waveform handler for waveform generation                                      
 
+#define MODE_PIN GPIO_NUM_2                                      // GPIO pin for the internal LED
+
 // declarations
 
 /* Operating modes

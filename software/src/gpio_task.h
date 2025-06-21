@@ -12,6 +12,8 @@
 #define GPIO_STACK_SIZE 4096                                    // Stack size for the task
 #define TASK_PRIORITY 5                                         // Task priority
 #define BUTTON_PIN 25                                           // GPIO pin for the button
+#define STATUS_LED_PIN GPIO_NUM_13                                  // GPIO pin for the status LED
+
 
 // public
 

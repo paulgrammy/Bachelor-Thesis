@@ -4,6 +4,8 @@ static const char *TAG_BUTTON_TASK = "GPIO_TASK";
 static uint8_t task_parameters;                                 // Task parameters, unused but still defined
 static TaskHandle_t gpioHandle = NULL;                          // When task created successfully, this will hold the address in memory of the task
 const gpio_num_t button_pin = (gpio_num_t)BUTTON_PIN;           // GPIO pin for the button, default is 25
+static const gpio_num_t status_led_pin = (gpio_num_t)STATUS_LED_PIN; // GPIO pin for the status LED
+
 // definitions
 bool setup_gpio_task(void)
 {
@@ -12,8 +14,6 @@ bool setup_gpio_task(void)
     ESP_LOGI(TAG_BUTTON_TASK, "Setting up GPIO task...");
     gpio_set_direction(button_pin, GPIO_MODE_INPUT);            // Set the GPIO pin as input
     gpio_set_pull_mode(button_pin, GPIO_PULLUP_ONLY);           // Set the GPIO pin to pull-up mode
-
-    gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT);           // Setup Internal LED
 
     xTaskCreatePinnedToCore(gpio_event_loop,
                 "GPIO Task",
@@ -60,7 +60,7 @@ static void gpio_event_loop(void *pvParameters)
             start_time = xTaskGetTickCount();
             button_pressed = true;
             has_triggered_long_press = false;
-            gpio_set_level(GPIO_NUM_2, 1);                      // Turn LED on to indicate button press
+            gpio_set_level(status_led_pin, 1);                      // Turn LED on to indicate button press
 
             ESP_LOGI(TAG_BUTTON_TASK, "Button pressed!");
         }
@@ -70,7 +70,7 @@ static void gpio_event_loop(void *pvParameters)
         {
             button_pressed = false;                             // Mark Button release
             blinking = false;                                   // Stop blinking
-            gpio_set_level(GPIO_NUM_2, 0);                      // Turn LED off to be safe
+            gpio_set_level(status_led_pin, 0);                      // Turn LED off to be safe
             TickType_t elapsed_time = xTaskGetTickCount() - start_time;
 
             if (elapsed_time < pdMS_TO_TICKS(1000))
@@ -104,7 +104,7 @@ static void gpio_event_loop(void *pvParameters)
             if ((now - last_blink_time) > pdMS_TO_TICKS(100))   // Counter for 100ms
             {
                 led_state = !led_state;                         // Toggle LED state
-                gpio_set_level(GPIO_NUM_2, led_state);
+                gpio_set_level(status_led_pin, led_state);
                 last_blink_time = now;                          // Update last blink time
             }
         }
