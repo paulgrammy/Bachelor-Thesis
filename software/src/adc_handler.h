@@ -45,5 +45,4 @@ const char* identify_board(uint16_t voltage_mV);                // Identify boar
  */
 void identify_and_set_board_id(void);
 
-
 #endif // ADC_HANDLER_H
