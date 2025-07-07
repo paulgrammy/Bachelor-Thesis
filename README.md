@@ -24,3 +24,8 @@ FreeRTOS tasks are used to handle the different states of the code:
 
 ![State Machine Diagram Bachelor Thesis](https://github.com/user-attachments/assets/b82cdbd0-d250-4ea1-8fbb-eaca7b24918d)
 
+## Repo structure
+* doc: Pictures, Datasheets, Files documenting different aspects of the project
+* footprints: different footprints used in the PCB layout
+* schematics: KiCAD schematic and layout, and the LTSpice simulation of Op-Amp stages can be found here
+* software: the code implementation
