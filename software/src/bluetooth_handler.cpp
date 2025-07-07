@@ -2,9 +2,9 @@
 
 // declarations
 static const char *TAG_A2DP = "A2DP";                           // Tag for logging
-const uint8_t I2S_SCK = 14;                                     /* Audio data bit clock */
-const uint8_t I2S_WS = 17;                                      /* Audio data L&R clock */
-const uint8_t I2S_SDOUT = 4;                                    /* ESP32 audio data output */
+const uint8_t I2S_SCK = 14;                                     // I2S BCLK
+const uint8_t I2S_WS = 17;                                      // I2S LRCK 
+const uint8_t I2S_SDOUT = 4;                                    // I2S data output
 
 static TaskHandle_t a2dpTaskHandle = nullptr;
 static BluetoothA2DPSink a2dp_sink;
@@ -13,6 +13,7 @@ void a2dp_task(void *pvParameters)
 {
     ESP_LOGI(TAG_A2DP, "Starting Bluetooth A2DP sink");
 
+    // Configure I2S
     i2s_pin_config_t my_pins = {
         .bck_io_num = I2S_SCK,
         .ws_io_num = I2S_WS,
@@ -20,10 +21,7 @@ void a2dp_task(void *pvParameters)
         .data_in_num = I2S_PIN_NO_CHANGE};
 
     a2dp_sink.set_pin_config(my_pins);
-    a2dp_sink.set_stream_reader([](const uint8_t *data, uint32_t len)
-                                {
-                                });
-
+    a2dp_sink.set_stream_reader([](const uint8_t *data, uint32_t len){});
     a2dp_sink.start(get_board_id());
 
     while (true)

@@ -14,8 +14,15 @@
 
 // declarations
 
-#define WAVEFORM_TASK_STACK_SIZE 1000 // Larger stack size for the task
+#define WAVEFORM_TASK_STACK_SIZE 2048
 #define WAVEFORM_TASK_PRIORITY 10
+#define SAMPLE_RATE 44100
+#define FREQUENCY 440
+#define AMPLITUDE 4096
+#define LUT_SIZE 4096
+
+// This is number of frames (L+R sample) sent to the DAC
+#define WAVEFORM_NUM_SAMPLES 256
 
 // public
 
@@ -68,11 +75,6 @@ bool is_waveform_running();
 
 // private
 
-#define SAMPLE_RATE 44100
-#define FREQUENCY 440
-#define AMPLITUDE 4096
-#define LUT_SIZE 4096
-
 /* This function generates and sends waveform data in chunks to avoid blocking the CPU.
  * It uses the I2S driver to send the data to the DAC.
  * The waveform type is determined by the waveform_task_parameters variable.
@@ -85,6 +87,10 @@ bool is_waveform_running();
  */
 static void generate_wave();
 
+/* This function initializes the lookup tables for the waveform data, and replaces generate_wave().
+ * It will create a sine, square, triangle, and infected lookup table.
+ * The lookup tables are used to generate the waveform data in the generate_wave() function.
+ */
 void initialize_waveform_LUTs(); // Initialize the waveform lookup tables
 
 /* Waveform task

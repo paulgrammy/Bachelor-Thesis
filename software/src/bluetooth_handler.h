@@ -32,6 +32,8 @@ void bluetooth_mode_deinit();
 bool is_bluetooth_running();
 
 // private
-static bool is_running = false;                                 // Flag to mark if the task is running
+
+/* Flag to mark if the bluetooth task is running */
+static bool is_running = false;                                 
 
 #endif // BLUETOOTH_HANDLER_H

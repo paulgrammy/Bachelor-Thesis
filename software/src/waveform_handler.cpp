@@ -2,13 +2,14 @@
 
 // declarations
 
-static const char *TAG_WAVEFORM = "WAVEFORM";  // Tag for logging
-static uint8_t waveform_task_parameters;       // Task parameters, unused but still defined
-static TaskHandle_t waveformTaskHandle = NULL; // Task handle for the waveform task
-static const uint8_t I2S_SCK = 14;             // Audio data bit clock
-static const uint8_t I2S_WS = 17;              // Audio data L&R clock
-static const uint8_t I2S_SDOUT = 4;            // ESP32 audio data output
+static const char *TAG_WAVEFORM = "WAVEFORM";                   // Tag for logging
+static uint8_t waveform_task_parameters;                        // Task parameters, unused but still defined
+static TaskHandle_t waveformTaskHandle = NULL;                  // Task handle for the waveform task
+static const uint8_t I2S_SCK = 14;                              // I2S clock
+static const uint8_t I2S_WS = 17;                               // I2S LR clock
+static const uint8_t I2S_SDOUT = 4;                             // I2S data output
 
+//Lookup tables
 static int16_t sine_lut[LUT_SIZE];
 static int16_t square_lut[LUT_SIZE];
 static int16_t triangle_lut[LUT_SIZE];
@@ -18,10 +19,12 @@ static int16_t main_signal_lut[LUT_SIZE];
 static const float sample_rate = SAMPLE_RATE;
 static const float frequency = FREQUENCY;
 static const float amplitude = AMPLITUDE;
-static uint32_t phase = 0; 
-static uint32_t phase_infected = 0; // Phase for the infected wave
-#define WAVEFORM_NUM_SAMPLES 256
-static int16_t waveform_data[WAVEFORM_NUM_SAMPLES * 2]; // Stereo (L+R) samples
+
+static uint32_t phase = 0;                                      // Phase for standard waveforms        
+static uint32_t phase_infected = 0;                             // Phase for the infected wave, required since it is a combination of two signals = different frequencies
+
+// 512 mono samples or 256 stereo samples, matching DMA buffer size => 5.8ms of audio data
+static int16_t waveform_data[WAVEFORM_NUM_SAMPLES * 2];         // Data buffer, two interleaved channels for left and right
 static int waveform_length_bytes = WAVEFORM_NUM_SAMPLES * 2 * sizeof(int16_t); // Length of the waveform data in bytes
 
 // definitions
@@ -29,7 +32,7 @@ static int waveform_length_bytes = WAVEFORM_NUM_SAMPLES * 2 * sizeof(int16_t); /
 // public
 bool is_waveform_running()
 {
-    return is_running; // Return the running flag
+    return is_running; 
 }
 
 void waveform_mode_init()
@@ -51,9 +54,9 @@ void waveform_mode_init()
         ESP_LOGW(TAG_WAVEFORM, "Waveform task already running");
     }
 
-    initialize_waveform_LUTs(); // Initialize the lookup tables for waveform data
+    initialize_waveform_LUTs();                                 // Initialize the lookup tables 
 
-    vTaskDelay(10);
+    vTaskDelay(10);                                             // Give it some time :) 
 
     // Kickstart generation
     set_waveform_type(waveform_task_parameters);
@@ -65,14 +68,14 @@ void waveform_mode_deinit()
 {
     if (waveformTaskHandle != NULL)
     {
-        vTaskDelete(waveformTaskHandle); // Delete the task
-        waveformTaskHandle = NULL;       // Reset the task handle
+        vTaskDelete(waveformTaskHandle); 
+        waveformTaskHandle = NULL;       
     }
 
     is_running = false;
 
     // De-initialize I2S
-    esp_err_t result = i2s_driver_uninstall(I2S_NUM_0); // Uninstall the I2S driver
+    esp_err_t result = i2s_driver_uninstall(I2S_NUM_0);         // Uninstall the I2S driver, because A2DP will install it again
     if (result == ESP_ERR_INVALID_STATE)
     {
         ESP_LOGE(TAG_WAVEFORM, "Failed to uninstall I2S driver: %s", esp_err_to_name(result));
@@ -82,26 +85,26 @@ void waveform_mode_deinit()
         ESP_LOGI(TAG_WAVEFORM, "I2S driver uninstalled successfully");
     }
 
-    waveform_task_parameters = 0; // Reset the waveform type
+    waveform_task_parameters = 0;                               // Reset the waveform type once you jump out of waveform mode
 }
 
 void waveform_task(void *pvParameters)
 {
     ESP_LOGI(TAG_WAVEFORM, "Starting waveform task");
 
-    // Optionally configure I2S pins
+    // Configure I2S pins
     i2s_pin_config_t my_pins = {
         .bck_io_num = I2S_SCK,
         .ws_io_num = I2S_WS,
         .data_out_num = I2S_SDOUT,
         .data_in_num = I2S_PIN_NO_CHANGE};
 
-    // This is taken from A2DP library
+    // This is taken from A2DP library for consistency
     i2s_config_t i2s_config = {
         .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
         .sample_rate = 44100,
         .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
-        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT, 
         .communication_format = (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S,
         .intr_alloc_flags = 0, // default interrupt priority
         .dma_buf_count = 4,
@@ -134,13 +137,12 @@ void waveform_task(void *pvParameters)
         return;
     }
 
-    // i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
     i2s_set_pin(I2S_NUM_0, &my_pins);
     
     // Main loop
     while (true)
     {
-        generate_wave(); // Generate the waveform data
+        generate_wave();                                        // Generate the waveform data
 
         size_t bytes_written;
         esp_err_t err = i2s_write(I2S_NUM_0, waveform_data, waveform_length_bytes, &bytes_written, portMAX_DELAY);
@@ -153,17 +155,16 @@ void waveform_task(void *pvParameters)
 
 uint8_t get_waveform_type()
 {
-    return waveform_task_parameters; // Return the current waveform type
+    return waveform_task_parameters; 
 }
 
 void set_waveform_type(uint8_t waveform_type)
 {
-    waveform_task_parameters = waveform_type; // Set the current waveform type
+    waveform_task_parameters = waveform_type;                   // Set the current waveform type
 
-    // Generate 1 full period of waveform data
     generate_wave();
 
-    ESP_LOGI(TAG_WAVEFORM, "Waveform buffer cleaned %d, %d", waveform_data[0], waveform_data[1]); // Log the change
+    ESP_LOGI(TAG_WAVEFORM, "Waveform buffer cleaned %d, %d", waveform_data[0], waveform_data[1]);
 }
 
 // private
@@ -187,11 +188,6 @@ static void generate_wave()
         //Increment phase for the lookup table
         int16_t sample = 0;
 
-        /* sinf is used because it is faster than sin
-         * - if sinf is used, there is no need for type conversion
-         * - it will also make code faster since it uses single-precision floating point, sin uses double-precision
-         * - there won't be any loss of precision since we are using 16-bit signed int
-         */
         switch (waveform_task_parameters)
         {
         case WAVEFORM_SINE:
@@ -219,17 +215,22 @@ static void generate_wave()
              * phase is in the range [0, 2*pi], so this will generate a continuous value in the range [-A, A]
              * (2/pi) is used to scale the value to the range [-A, A]
              */
+
+            /* Infected waveform will take a normal sine and a sine with half the frequency, and mix them together
+             * Multiply by 1.5 to scale the amplitude (slight increase in volume)
+             */
             sample = 1.5 * (0.5f * infected_lut[infected_lut_index] + 0.5f * main_signal_lut[lut_index]);
             break;
         case WAVEFORM_SWEEP:
             break;
         default:
             break;
+
         }
 
         // Write data to the waveform data array
-        waveform_data[2 * i] = sample;     // Left channel
-        waveform_data[2 * i + 1] = sample; // Right channel
+        waveform_data[2 * i] = sample;                          // Left channel
+        waveform_data[2 * i + 1] = sample;                      // Right channel
 
         // Increment phase for the next sample
         phase += phase_inc;
@@ -245,6 +246,12 @@ static void generate_wave()
 
 void initialize_waveform_LUTs()
 {
+    /* sinf is used because it is faster than sin
+     * - if sinf is used, there is no need for type conversion
+     * - it will also make code faster since it uses single-precision floating point, sin uses double-precision
+     * - there won't be any loss of precision since we are using 16-bit signed int
+     */
+
     // Initialize sine lookup table
     for (int i = 0; i < LUT_SIZE; ++i)
     {
