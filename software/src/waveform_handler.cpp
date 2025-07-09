@@ -263,8 +263,6 @@ void initialize_waveform_LUTs()
 
         triangle_lut[i] = (int16_t)(amplitude * (2.0f * i / LUT_SIZE - 1.0f));
 
-        float t = (float)i / (float)LUT_SIZE; // Normalized time from 0 to 1
-
         float main = 0.4f * sinf(phase * 4.0f);
         float infected = 0.6f * sinf(phase);
 
